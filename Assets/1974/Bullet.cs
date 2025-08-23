@@ -4,17 +4,31 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 10f;
-    Rigidbody2D rb;
+    public TankController owner;
+    public float lifeTime = 3f;
+
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        rb.velocity = transform.up * speed; // move forward in local "up" direction
+        Destroy(gameObject, lifeTime);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnDestroy()
     {
-        // Destroy bullet on impact
-        Destroy(gameObject);
+        if (owner != null)
+        {
+            owner.OnShellDestroyed();
+        }
+    }
+
+    void OnTriggerEnter2D(UnityEngine.Collider2D col)
+    {
+        // Check if we hit a tank
+        TankHealth tank = col.gameObject.GetComponent<TankHealth>();
+        if (tank != null && tank.gameObject != owner.gameObject)
+        {
+            tank.TakeHit();
+        }
+
+        Destroy(gameObject); // remove shell
     }
 }
