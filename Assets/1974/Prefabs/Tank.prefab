@@ -228,10 +228,10 @@ MonoBehaviour:
   m_DetectableTags:
   - Wall
   - Tank
-  m_RaysPerDirection: 8
+  m_RaysPerDirection: 36
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0.6
-  m_RayLength: 20
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291

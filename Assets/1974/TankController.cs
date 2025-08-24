@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -12,17 +11,21 @@ public class TankController : MonoBehaviour
 
     public Transform firePoint;
     public GameObject bulletPrefab;
-    private GameObject currentBullet; // track active shell
+    private GameObject currentBullet;
+
+    [Header("Shooting Settings")]
+    public float shootCooldown = 0.5f; // Prevent spam shooting
+    private float lastShotTime;
 
     Rigidbody2D rb;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0; // important for top-down
+        rb.gravityScale = 0;
+        lastShotTime = -shootCooldown; // Allow immediate first shot
     }
 
-    // Called every frame by input drivers
     public void Drive(float moveInput, float turnInput, bool shoot)
     {
         // Move
@@ -33,17 +36,23 @@ public class TankController : MonoBehaviour
         float newRot = rb.rotation - turnInput * rotationSpeed * Time.fixedDeltaTime;
         rb.MoveRotation(newRot);
 
-        // Shoot
-        if (shoot)
+        // Shoot with cooldown
+        if (shoot && CanShoot())
         {
             Fire();
         }
     }
 
+    public bool CanShoot()
+    {
+        return currentBullet == null && Time.time >= lastShotTime + shootCooldown;
+    }
+
     void Fire()
     {
-        if (currentBullet != null) return; // only one shell at a time
+        if (!CanShoot()) return;
 
+        lastShotTime = Time.time;
         currentBullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
         var rbBullet = currentBullet.GetComponent<Rigidbody2D>();
@@ -52,7 +61,6 @@ public class TankController : MonoBehaviour
         Bullet bullet = currentBullet.GetComponent<Bullet>();
         bullet.owner = this;
 
-        // Check if this tank has an Agent attached
         TankAgent agent = GetComponent<TankAgent>();
         if (agent != null)
         {

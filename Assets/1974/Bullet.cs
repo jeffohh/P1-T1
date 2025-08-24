@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     public TankController owner;
     private TankAgent ownerAgent;
     public float lifeTime = 3f;
+    private bool hasHitTarget = false;
 
     public void Init(TankAgent tankOwner)
     {
@@ -24,32 +25,38 @@ public class Bullet : MonoBehaviour
         {
             owner.OnShellDestroyed();
         }
+
+        // If bullet expired without hitting anything, penalize slightly
+        if (!hasHitTarget && ownerAgent != null)
+        {
+            ownerAgent.OnMissedShot();
+        }
     }
 
     void OnTriggerEnter2D(UnityEngine.Collider2D col)
     {
+        hasHitTarget = true; // Mark that we hit something
+
         // Check if we hit a tank
         TankHealth tank = col.gameObject.GetComponent<TankHealth>();
-        
+
         if (tank != null && tank.gameObject != owner.gameObject)
         {
             tank.TakeHit();
         }
 
-        Destroy(gameObject); // remove shell
-
         TankAgent tankAgent = col.gameObject.GetComponent<TankAgent>();
         if (tankAgent != null && tankAgent != ownerAgent)
         {
-            // This shell hit the other AI (bad for them)
+            // This shell hit the other AI (good hit!)
             ownerAgent.RewardForHit();
             tankAgent.PenalizeForGettingHit();
         }
         else if (col.CompareTag("Wall") && ownerAgent != null)
         {
-            ownerAgent.AddReward(-0.1f); // wasted shot
-            Destroy(gameObject);
+            ownerAgent.AddReward(-0.05f); // Increased penalty for hitting walls
         }
 
+        Destroy(gameObject);
     }
 }
