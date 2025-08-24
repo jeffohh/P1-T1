@@ -51,6 +51,13 @@ public class TankController : MonoBehaviour
 
         Bullet bullet = currentBullet.GetComponent<Bullet>();
         bullet.owner = this;
+
+        // Check if this tank has an Agent attached
+        TankAgent agent = GetComponent<TankAgent>();
+        if (agent != null)
+        {
+            currentBullet.GetComponent<Bullet>().Init(agent);
+        }
     }
 
     public void OnShellDestroyed()
