@@ -18,8 +18,10 @@ public class TankAgent : Agent
     public float optimalDistance = 8f;
 
     // --- Action Smoothing ---
-    private int lastMoveAction = 1; // 1 = none
-    private int lastTurnAction = 1; // 1 = none
+    private int _lastMoveAction = 1; // 0=B, 1=N, 2=F
+    private int _lastTurnAction = 1; // 0=L, 1=N, 2=R
+    private int _consecutiveMoveSteps = 0;
+    private int _consecutiveTurnSteps = 0;
 
     private int stepsInEpisode = 0;
     private int maxStepsPerEpisode = 5000; // ~50 seconds
@@ -41,8 +43,10 @@ public class TankAgent : Agent
         enemyTank.position = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
         enemyTank.rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
 
-        lastMoveAction = 1;
-        lastTurnAction = 1;
+        _lastMoveAction = 1;
+        _lastTurnAction = 1;
+        _consecutiveMoveSteps = 0;
+        _consecutiveTurnSteps = 0;
 
         stepsInEpisode = 0;
     }
@@ -82,19 +86,27 @@ public class TankAgent : Agent
         int shootAction = actions.DiscreteActions[2];  // 0=no, 1=yes
 
         // --- Apply Action Smoothing Penalty ---
-        // Penalize switching from forward to backward (or vice versa) directly.
-        if ((lastMoveAction == 0 && moveAction == 2) || (lastMoveAction == 2 && moveAction == 0))
+        // --- NEW: Update Consecutive Action Counters ---
+        if (moveAction == _lastMoveAction && moveAction != 1) // If same move action and not idle
         {
-            AddReward(-0.02f);
+            _consecutiveMoveSteps++;
         }
-        // Penalize switching from left to right (or vice versa) directly.
-        if ((lastTurnAction == 0 && turnAction == 2) || (lastTurnAction == 2 && turnAction == 0))
+        else
         {
-            AddReward(-0.02f);
+            _consecutiveMoveSteps = 0; // Reset if action changes or stops
         }
 
-        lastMoveAction = moveAction;
-        lastTurnAction = turnAction;
+        if (turnAction == _lastTurnAction && turnAction != 1) // If same turn action and not idle
+        {
+            _consecutiveTurnSteps++;
+        }
+        else
+        {
+            _consecutiveTurnSteps = 0; // Reset if action changes or stops
+        }
+
+        _lastMoveAction = moveAction;
+        _lastTurnAction = turnAction;
 
         // --- Control the tank ---
         float move = (moveAction == 0) ? -1f : (moveAction == 2) ? 1f : 0f;
@@ -123,39 +135,57 @@ public class TankAgent : Agent
 
     private void CalculateRewards(float move, float turn, bool shoot)
     {
-        // Small penalty to encourage action over inaction
+        // --- 1. Small Time Penalty (encourages efficiency) ---
         AddReward(-0.001f);
 
-        // --- REVISED AND FINAL Shooting Rewards ---
+        // --- 2. Positioning and Aiming Analysis ---
         bool hasLineOfSight = CheckLineOfSight();
         Vector3 toEnemy = enemyTank.position - transform.position;
+        float distanceToEnemy = toEnemy.magnitude;
         float angleToEnemy = Vector2.Angle(transform.up, toEnemy);
 
+        // --- 3. THE "TACTICAL ADVANTAGE" REWARD (The Sledgehammer) ---
+        // This is the core of the new system. We reward the agent for getting all the conditions right.
+        if (hasLineOfSight)
+        {
+            // A. Start with a base reward just for seeing the enemy.
+            AddReward(0.01f);
+
+            // B. Reward for being at the optimal combat distance.
+            // We use an animation curve shape: max reward at optimalDistance, falls off on either side.
+            float distanceScore = 1.0f - Mathf.Abs(distanceToEnemy - optimalDistance) / optimalDistance;
+            AddReward(Mathf.Max(0, distanceScore) * 0.02f); // Reward is between 0 and 0.02
+
+            // C. Reward for aiming. The closer to 0 degrees, the higher the reward.
+            float facingScore = 1.0f - (angleToEnemy / 90f); // Score from 1 (perfect aim) to 0 (90 degrees off)
+            AddReward(Mathf.Max(0, facingScore) * 0.03f); // Reward is between 0 and 0.03
+        }
+
+        // --- 4. PENALTY FOR AIMLESS SPINNING ---
+        // This directly punishes the "spin-to-win" strategy.
+        if (move == 0 && turn != 0 && !hasLineOfSight)
+        {
+            // If I'm not moving, I am turning, and I can't see the enemy... I am aimlessly spinning.
+            AddReward(-0.05f);
+        }
+
+        // --- 5. SHOOTING LOGIC (Unchanged but now better supported) ---
+        // Your highly punishing shooting logic is still essential.
         if (shoot && controller.CanShoot())
         {
-            // Increase the unconditional cost. Firing is a commitment.
-            AddReward(-0.05f);
-
+            AddReward(-0.05f); // Unconditional cost to fire
             if (!hasLineOfSight)
             {
-                // Make shooting at walls extremely punishing.
-                AddReward(-0.5f);
+                AddReward(-0.5f); // Punish blind shots
             }
-            else if (angleToEnemy < 5f) // Stricter angle for a "good shot"
+            else if (angleToEnemy < 5f)
             {
-                // The reward for a perfect shot is still there.
-                AddReward(0.1f);
+                AddReward(0.1f); // Reward well-aimed shots
             }
             else
             {
-                // Significantly increase the penalty for a badly aimed but clear shot.
-                AddReward(-0.25f);
+                AddReward(-0.25f); // Punish poorly-aimed shots
             }
-        }
-
-        if (timeSinceLastLoS > 3.0f) // If it's been over 3 seconds since seeing the enemy
-        {
-            AddReward(-0.005f); // Apply a small, continuous penalty
         }
 
         // --- Wall Avoidance (Backwards) ---
@@ -168,7 +198,6 @@ public class TankAgent : Agent
                 AddReward(-0.1f);
             }
         }
-
     }
 
     private bool CheckLineOfSight()
