@@ -48,7 +48,12 @@ public class TankHealth : MonoBehaviour
         while (isDisabled)
         {
             spriteRenderer.enabled = !spriteRenderer.enabled;
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.125f);
         }
+    }
+
+    public bool IsDisabled()
+    {
+        return isDisabled;
     }
 }

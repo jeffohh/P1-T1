@@ -6,89 +6,73 @@ using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 
 [RequireComponent(typeof(TankController))]
+[RequireComponent(typeof(TankHealth))]
 public class TankAgent : Agent
 {
     private TankController controller;
+    private TankHealth health;
     public Transform enemyTank;
     public Transform[] spawnPoints;
 
     [Header("AI Training Settings")]
-    public float rewardForFacing = 0.005f;
-    public float rewardForClosing = 0.002f;
-    public float penaltyForDistance = 0.001f;
+    public float optimalDistance = 8f;
 
-    private Vector3 lastPosition;
-    private float lastDistanceToEnemy;
-    private bool hasLineOfSight;
-    private float timeSinceLastShot;
+    // --- Action Smoothing ---
+    private int lastMoveAction = 1; // 1 = none
+    private int lastTurnAction = 1; // 1 = none
+
+    private int stepsInEpisode = 0;
+    private int maxStepsPerEpisode = 5000; // ~50 seconds
+
+    private float timeSinceLastLoS = 0f;
 
     void Awake()
     {
         controller = GetComponent<TankController>();
+        health = GetComponent<TankHealth>();
     }
 
     public override void OnEpisodeBegin()
     {
         // Reset state
-        timeSinceLastShot = 0f;
-        hasLineOfSight = false;
-
-        // Pick random spawn point
-        int i = Random.Range(0, spawnPoints.Length);
-        transform.position = spawnPoints[i].position;
+        transform.position = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
         transform.rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
 
-        lastPosition = transform.position;
-        lastDistanceToEnemy = Vector3.Distance(transform.position, enemyTank.position);
+        enemyTank.position = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
+        enemyTank.rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
+
+        lastMoveAction = 1;
+        lastTurnAction = 1;
+
+        stepsInEpisode = 0;
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        // My position and rotation (normalized to map bounds)
-        sensor.AddObservation(transform.position / 20f); // my position (2)
-        sensor.AddObservation(transform.up); // my facing direction (2)
+        // My position and rotation (normalized to map bounds, assuming ~20 units)
+        sensor.AddObservation(transform.localPosition / 20f); // (2)
+        sensor.AddObservation(transform.up); // My facing direction (2)
 
         // Enemy position and rotation
-        sensor.AddObservation(enemyTank.position / 20f); // enemy position (2)
-        sensor.AddObservation(enemyTank.up); // enemy facing direction (2)
+        sensor.AddObservation(enemyTank.localPosition / 20f); // (2)
+        sensor.AddObservation(enemyTank.up); // Enemy facing direction (2)
 
-        // Relative information (still useful for direct decision making)
+        // Relative information
         Vector2 toEnemy = enemyTank.position - transform.position;
-        sensor.AddObservation(toEnemy.normalized); // direction to enemy (2)
-        sensor.AddObservation(toEnemy.magnitude / 20f); // normalized distance (1)
+        sensor.AddObservation(toEnemy.normalized); // Direction to enemy (2)
+        sensor.AddObservation(toEnemy.magnitude / 20f); // Normalized distance (1)
 
-        // Angular information for aiming
         float angleToEnemy = Vector2.SignedAngle(transform.up, toEnemy);
-        sensor.AddObservation(angleToEnemy / 180f); // normalized angle (-1 to 1) (1)
+        sensor.AddObservation(angleToEnemy / 180f); // Normalized angle (-1 to 1) (1)
 
         // Velocity information
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        sensor.AddObservation(rb.velocity / 10f); // my velocity (2)
-
-        // Enemy velocity
-        Rigidbody2D enemyRb = enemyTank.GetComponent<Rigidbody2D>();
-        if (enemyRb != null)
-        {
-            sensor.AddObservation(enemyRb.velocity / 10f); // enemy velocity (2)
-        }
-        else
-        {
-            sensor.AddObservation(Vector2.zero); // (2)
-        }
+        sensor.AddObservation(GetComponent<Rigidbody2D>().velocity / 10f); // My velocity (2)
+        sensor.AddObservation(enemyTank.GetComponent<Rigidbody2D>().velocity / 10f); // Enemy velocity (2)
 
         // Tactical information
-        sensor.AddObservation(hasLineOfSight ? 1f : 0f); // can see enemy (1)
-        sensor.AddObservation(controller.CanShoot() ? 1f : 0f); // can shoot (1)
-        sensor.AddObservation(Mathf.Min(timeSinceLastShot / 3f, 1f)); // time since shot (1)
-
-        // Predictive aiming helper - where enemy will be in 1 second
-        Vector3 predictedEnemyPos = enemyTank.position + (enemyRb != null ? (Vector3)enemyRb.velocity : Vector3.zero);
-        Vector2 toPredictedEnemy = predictedEnemyPos - transform.position;
-        sensor.AddObservation(toPredictedEnemy.normalized); // direction to predicted position (2)
-        float angleToPredicted = Vector2.SignedAngle(transform.up, toPredictedEnemy);
-        sensor.AddObservation(angleToPredicted / 180f); // angle to predicted position (1)
-
-        // Total: 24 observations
+        sensor.AddObservation(CheckLineOfSight());      // Can see enemy (1)
+        sensor.AddObservation(controller.CanShoot());   // Can shoot (1)
+        sensor.AddObservation(health.IsDisabled());     // Am I stunned/disabled (1)
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -97,172 +81,113 @@ public class TankAgent : Agent
         int turnAction = actions.DiscreteActions[1];   // 0=left, 1=none, 2=right
         int shootAction = actions.DiscreteActions[2];  // 0=no, 1=yes
 
+        // --- Apply Action Smoothing Penalty ---
+        // Penalize switching from forward to backward (or vice versa) directly.
+        if ((lastMoveAction == 0 && moveAction == 2) || (lastMoveAction == 2 && moveAction == 0))
+        {
+            AddReward(-0.02f);
+        }
+        // Penalize switching from left to right (or vice versa) directly.
+        if ((lastTurnAction == 0 && turnAction == 2) || (lastTurnAction == 2 && turnAction == 0))
+        {
+            AddReward(-0.02f);
+        }
+
+        lastMoveAction = moveAction;
+        lastTurnAction = turnAction;
+
+        // --- Control the tank ---
         float move = (moveAction == 0) ? -1f : (moveAction == 2) ? 1f : 0f;
         float turn = (turnAction == 0) ? -1f : (turnAction == 2) ? 1f : 0f;
         bool shoot = (shootAction == 1);
 
-        // Track shooting attempts
-        if (shoot && controller.CanShoot())
-        {
-            timeSinceLastShot = 0f;
-        }
-
         controller.Drive(move, turn, shoot);
 
-        // Calculate rewards
+        if (CheckLineOfSight())
+        {
+            timeSinceLastLoS = 0f; // Reset timer if we can see the enemy
+        }
+        else
+        {
+            timeSinceLastLoS += Time.fixedDeltaTime; // Increment timer if we can't
+        }
+
         CalculateRewards(move, turn, shoot);
 
-        timeSinceLastShot += Time.fixedDeltaTime;
+        stepsInEpisode++;
+        if (stepsInEpisode >= maxStepsPerEpisode)
+        {
+            EndEpisode(); // End the "round"
+        }
     }
 
     private void CalculateRewards(float move, float turn, bool shoot)
     {
+        // Small penalty to encourage action over inaction
+        AddReward(-0.001f);
+
+        bool hasLineOfSight = CheckLineOfSight();
         Vector3 toEnemy = enemyTank.position - transform.position;
-        float currentDistance = toEnemy.magnitude;
-
-        // 1. Reward for facing the enemy
         float angleToEnemy = Vector2.Angle(transform.up, toEnemy);
-        float facingReward = Mathf.Lerp(rewardForFacing, -rewardForFacing / 2f, angleToEnemy / 180f);
-        AddReward(facingReward);
 
-        // 2. Reward for getting closer when far, maintaining distance when close
-        float optimalDistance = 8f; // Optimal engagement distance
-        if (currentDistance > optimalDistance && currentDistance < lastDistanceToEnemy)
-        {
-            AddReward(rewardForClosing); // Reward for closing distance when far
-        }
-        else if (currentDistance < optimalDistance && currentDistance > lastDistanceToEnemy)
-        {
-            AddReward(rewardForClosing * 0.5f); // Small reward for backing up when too close
-        }
-
-        // 3. Distance-based penalty (encourages finding good engagement range)
-        float distancePenalty = Mathf.Abs(currentDistance - optimalDistance) * penaltyForDistance / 20f;
-        AddReward(-distancePenalty);
-
-        // 4. Line of sight detection and reward
-        hasLineOfSight = CheckLineOfSight();
-        if (hasLineOfSight)
-        {
-            AddReward(0.015f); // Increased reward for seeing the enemy
-
-            // Extra reward for good aiming with line of sight
-            if (angleToEnemy < 10f) // within 10 degrees
-            {
-                AddReward(0.03f);
-            }
-            else if (angleToEnemy < 30f) // within 30 degrees  
-            {
-                AddReward(0.01f);
-            }
-        }
-
-        // 5. Predictive aiming reward - reward for aiming where enemy will be
-        Rigidbody2D enemyRb = enemyTank.GetComponent<Rigidbody2D>();
-        if (enemyRb != null && enemyRb.velocity.magnitude > 0.1f)
-        {
-            Vector3 predictedPos = enemyTank.position + (Vector3)enemyRb.velocity * 0.8f; // Predict ~0.8s ahead
-            Vector3 toPredicted = predictedPos - transform.position;
-            float angleToPredicted = Vector2.Angle(transform.up, toPredicted);
-
-            if (angleToPredicted < 15f && hasLineOfSight)
-            {
-                AddReward(0.02f); // Reward predictive aiming
-            }
-        }
-
-        // 6. Shooting behavior rewards/penalties
+        // --- Shooting Rewards ---
         if (shoot && controller.CanShoot())
         {
+            AddReward(-0.02f); // Keep the base cost for firing a shot
+
             if (!hasLineOfSight)
             {
-                AddReward(-0.08f); // Higher penalty for blind shooting
+                AddReward(-0.3f); // Keep HIGH penalty for shooting at walls
             }
-            else if (angleToEnemy > 45f)
+            else if (angleToEnemy < 8f)
             {
-                AddReward(-0.05f); // Penalty for poorly aimed shots
+                AddReward(0.1f); // Reward for taking a well-aimed shot
             }
-            else if (angleToEnemy < 15f)
+            else
             {
-                AddReward(0.05f); // Reward for well-aimed shots
+                AddReward(-0.1f); // Penalize poorly aimed shots
             }
         }
 
-        // 7. Tactical positioning - reward for good positioning relative to enemy facing
-        Vector3 enemyForward = enemyTank.up;
-        Vector3 toMe = transform.position - enemyTank.position;
-        float enemyAimingAtMe = Vector2.Angle(enemyForward, toMe);
-
-        // Reward for being out of enemy's direct aim
-        if (enemyAimingAtMe > 45f)
+        if (timeSinceLastLoS > 3.0f) // If it's been over 3 seconds since seeing the enemy
         {
-            AddReward(0.008f);
+            AddReward(-0.005f); // Apply a small, continuous penalty
         }
 
-        // 8. Movement rewards
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (currentDistance > optimalDistance * 1.5f && rb.velocity.magnitude > 0.1f)
+        // --- Wall Avoidance (Backwards) ---
+        if (move < 0) // If moving backward
         {
-            AddReward(0.002f); // Reward movement when far from optimal range
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 2f, LayerMask.GetMask("Walls"));
+            if (hit.collider != null)
+            {
+                // Penalize moving backward into a nearby wall
+                AddReward(-0.1f);
+            }
         }
 
-        // 9. Small time penalty to encourage decisive action
-        AddReward(-0.0008f);
-
-        // Update tracking variables
-        lastDistanceToEnemy = currentDistance;
-        lastPosition = transform.position;
     }
 
     private bool CheckLineOfSight()
     {
-        Vector2 direction = (enemyTank.position - transform.position).normalized;
-        float distance = Vector2.Distance(transform.position, enemyTank.position);
+        Vector2 firePointPos = controller.firePoint.position;
+        Vector2 direction = ((Vector2)enemyTank.position - firePointPos).normalized;
+        float distance = Vector2.Distance(firePointPos, enemyTank.position);
+        int layerMask = 1 << gameObject.layer;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, distance);
-
-        // If we hit the enemy tank directly, or if we hit nothing (clear path)
-        if (hit.collider == null || hit.collider.CompareTag("Tank"))
-        {
-            return true;
-        }
-
-        return false;
+        RaycastHit2D hit = Physics2D.Raycast(firePointPos, direction, distance, ~layerMask);
+        return hit.collider == null || hit.transform == enemyTank;
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         var actions = actionsOut.DiscreteActions;
-
-        // Move (W/S)
-        if (Input.GetKey(KeyCode.W)) actions[0] = 2;
-        else if (Input.GetKey(KeyCode.S)) actions[0] = 0;
-        else actions[0] = 1;
-
-        // Turn (A/D)
-        if (Input.GetKey(KeyCode.A)) actions[1] = 0;
-        else if (Input.GetKey(KeyCode.D)) actions[1] = 2;
-        else actions[1] = 1;
-
-        // Shoot (Space)
-        actions[2] = Input.GetKey(KeyCode.Space) ? 1 : 0;
+        actions[0] = 1; actions[1] = 1; actions[2] = 0;
+        if (Input.GetKey(KeyCode.W)) actions[0] = 2; else if (Input.GetKey(KeyCode.S)) actions[0] = 0;
+        if (Input.GetKey(KeyCode.A)) actions[1] = 0; else if (Input.GetKey(KeyCode.D)) actions[1] = 2;
+        if (Input.GetKey(KeyCode.Space)) actions[2] = 1;
     }
 
-    public void RewardForHit()
-    {
-        AddReward(+2f); // Increased reward for successful hit
-        EndEpisode();
-    }
-
-    public void PenalizeForGettingHit()
-    {
-        AddReward(-2f); // Increased penalty for getting hit
-        EndEpisode();
-    }
-
-    // Called when agent shoots but misses
-    public void OnMissedShot()
-    {
-        AddReward(-0.1f);
-    }
+    public void RewardForHit() { AddReward(1.0f); }
+    public void PenalizeForGettingHit() { AddReward(-1.0f); }
+    public void OnMissedShot() { AddReward(-0.3f); } // Increased penalty
 }

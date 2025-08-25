@@ -13,21 +13,18 @@ public class TankController : MonoBehaviour
     public GameObject bulletPrefab;
     private GameObject currentBullet;
 
-    [Header("Shooting Settings")]
-    public float shootCooldown = 0.5f; // Prevent spam shooting
-    private float lastShotTime;
-
     Rigidbody2D rb;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
-        lastShotTime = -shootCooldown; // Allow immediate first shot
     }
 
     public void Drive(float moveInput, float turnInput, bool shoot)
     {
+        if (enabled == false) return;
+
         // Move
         Vector2 forward = moveInput * moveSpeed * transform.up;
         rb.velocity = forward;
@@ -45,14 +42,13 @@ public class TankController : MonoBehaviour
 
     public bool CanShoot()
     {
-        return currentBullet == null && Time.time >= lastShotTime + shootCooldown;
+        return currentBullet == null;
     }
 
     void Fire()
     {
         if (!CanShoot()) return;
 
-        lastShotTime = Time.time;
         currentBullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
         var rbBullet = currentBullet.GetComponent<Rigidbody2D>();

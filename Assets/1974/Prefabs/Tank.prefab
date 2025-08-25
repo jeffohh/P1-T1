@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6160804361997016365}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 9150046155340487195}
   - component: {fileID: 4262578604169974421}
   - component: {fileID: -7182181161546904937}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tank
   m_TagString: Tank
   m_Icon: {fileID: 0}
@@ -228,13 +228,13 @@ MonoBehaviour:
   m_DetectableTags:
   - Wall
   - Tank
-  m_RaysPerDirection: 36
-  m_MaxRayDegrees: 180
+  m_RaysPerDirection: 5
+  m_MaxRayDegrees: 90
   m_SphereCastRadius: 0.6
-  m_RayLength: 100
+  m_RayLength: 12
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 512
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
-  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  rayMissColor: {r: 0.089157104, g: 0, b: 1, a: 1}

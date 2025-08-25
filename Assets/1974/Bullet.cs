@@ -46,7 +46,7 @@ public class Bullet : MonoBehaviour
         }
 
         TankAgent tankAgent = col.gameObject.GetComponent<TankAgent>();
-        if (tankAgent != null && tankAgent != ownerAgent)
+        if (ownerAgent != null && tankAgent != null && tankAgent != ownerAgent)
         {
             // This shell hit the other AI (good hit!)
             ownerAgent.RewardForHit();

@@ -158,6 +158,9 @@ MonoBehaviour:
   - {fileID: 1599866017}
   - {fileID: 1864296911}
   - {fileID: 822786824}
+  rewardForFacing: 0.005
+  rewardForClosing: 0.002
+  penaltyForDistance: 0.001
 --- !u!114 &219277604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4471,6 +4474,9 @@ MonoBehaviour:
   - {fileID: 1599866017}
   - {fileID: 1864296911}
   - {fileID: 822786824}
+  rewardForFacing: 0.005
+  rewardForClosing: 0.002
+  penaltyForDistance: 0.001
 --- !u!114 &2107411545
 MonoBehaviour:
   m_ObjectHideFlags: 0

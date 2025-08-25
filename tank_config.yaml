@@ -1,77 +1,26 @@
-# Engine settings for Unity optimization
-engine_settings:
-  width: 512
-  height: 512
-  quality_level: 0
-  time_scale: 20           # 10x speed boost
-  target_frame_rate: -1    # Unlimited FPS
-  capture_frame_rate: 60
-
 behaviors:
   TankAI:
     trainer_type: ppo
-    
     hyperparameters:
-      # Larger batch sizes for stable learning with complex observations
       batch_size: 1024
-      buffer_size: 12288
-      
-      # Conservative learning rate for complex observation space
-      learning_rate: 8.0e-5
-      beta: 1.2e-3
-      
-      # PPO clipping and regularization
-      epsilon: 0.15
-      lambd: 0.97
-      num_epoch: 4
-      
+      buffer_size: 10240
+      learning_rate: 1.0e-4 # Keeping this lower for stability is good practice
+      beta: 5.0e-3          # Encourages exploration
+      epsilon: 0.2
+      lambd: 0.95
+      num_epoch: 3
     network_settings:
-      # Essential for the 24 diverse observations we're providing
       normalize: true
-      
-      # Larger network to handle complex tactical decisions
-      hidden_units: 512
-      num_layers: 3
-      
-      # Memory for temporal decision making (optional but recommended)
+      hidden_units: 256
+      num_layers: 2         # 2 layers is often sufficient and trains faster
+      vis_encode_type: simple
       memory:
         sequence_length: 64
         memory_size: 256
-        
     reward_signals:
-      # Primary reward signal
       extrinsic:
-        gamma: 0.995  # High gamma for long-term tactical planning
-        strength: 1.0
-        
-      # Curiosity to encourage exploration of different tactics
-      curiosity:
         gamma: 0.99
-        strength: 0.008  # Low since we have detailed reward shaping
-        network_settings:
-          encoding_size: 512
-        learning_rate: 3.0e-4
-        
-    # Extended training for complex combat AI
-    max_steps: 2000000
-    
-    # Longer episodes to learn multi-step tactics
-    time_horizon: 512
-    
-    # More frequent summaries to monitor complex learning
+        strength: 1.0
+    max_steps: 30000000
+    time_horizon: 256
     summary_freq: 10000
-    
-    # Enable self-play for even better training (optional)
-    # self_play:
-    #   save_steps: 50000
-    #   team_change: 200000
-    #   swap_steps: 2000
-    #   window: 10
-    #   play_against_latest_model_ratio: 0.5
-    #   initial_elo: 1200.0
-    
-    # Behavioral cloning from human play (optional - if you have demo data)
-    # behavioral_cloning:
-    #   demo_path: tank_demos.demo
-    #   strength: 0.5
-    #   steps: 150000
