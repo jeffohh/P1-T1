@@ -12,10 +12,13 @@ public class TankHealth : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private float disableTimer;
 
+    private Rigidbody2D rb;
+
     void Awake()
     {
         controller = GetComponent<TankController>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     public void TakeHit()
@@ -24,6 +27,9 @@ public class TankHealth : MonoBehaviour
 
         isDisabled = true;
         disableTimer = disableTime;
+
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0f;
 
         controller.enabled = false; // stop movement + shooting
         StartCoroutine(FlashRoutine());

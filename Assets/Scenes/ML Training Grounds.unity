@@ -158,9 +158,7 @@ MonoBehaviour:
   - {fileID: 1599866017}
   - {fileID: 1864296911}
   - {fileID: 822786824}
-  rewardForFacing: 0.005
-  rewardForClosing: 0.002
-  penaltyForDistance: 0.001
+  optimalDistance: 8
 --- !u!114 &219277604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +217,7 @@ GameObject:
   - component: {fileID: 220100598}
   - component: {fileID: 220100597}
   - component: {fileID: 220100596}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4474,9 +4472,7 @@ MonoBehaviour:
   - {fileID: 1599866017}
   - {fileID: 1864296911}
   - {fileID: 822786824}
-  rewardForFacing: 0.005
-  rewardForClosing: 0.002
-  penaltyForDistance: 0.001
+  optimalDistance: 8
 --- !u!114 &2107411545
 MonoBehaviour:
   m_ObjectHideFlags: 0

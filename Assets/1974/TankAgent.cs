@@ -126,26 +126,30 @@ public class TankAgent : Agent
         // Small penalty to encourage action over inaction
         AddReward(-0.001f);
 
+        // --- REVISED AND FINAL Shooting Rewards ---
         bool hasLineOfSight = CheckLineOfSight();
         Vector3 toEnemy = enemyTank.position - transform.position;
         float angleToEnemy = Vector2.Angle(transform.up, toEnemy);
 
-        // --- Shooting Rewards ---
         if (shoot && controller.CanShoot())
         {
-            AddReward(-0.02f); // Keep the base cost for firing a shot
+            // Increase the unconditional cost. Firing is a commitment.
+            AddReward(-0.05f);
 
             if (!hasLineOfSight)
             {
-                AddReward(-0.3f); // Keep HIGH penalty for shooting at walls
+                // Make shooting at walls extremely punishing.
+                AddReward(-0.5f);
             }
-            else if (angleToEnemy < 8f)
+            else if (angleToEnemy < 5f) // Stricter angle for a "good shot"
             {
-                AddReward(0.1f); // Reward for taking a well-aimed shot
+                // The reward for a perfect shot is still there.
+                AddReward(0.1f);
             }
             else
             {
-                AddReward(-0.1f); // Penalize poorly aimed shots
+                // Significantly increase the penalty for a badly aimed but clear shot.
+                AddReward(-0.25f);
             }
         }
 
@@ -189,5 +193,5 @@ public class TankAgent : Agent
 
     public void RewardForHit() { AddReward(1.0f); }
     public void PenalizeForGettingHit() { AddReward(-1.0f); }
-    public void OnMissedShot() { AddReward(-0.3f); } // Increased penalty
+    public void OnMissedShot() { AddReward(-0.4f); } // Increased penalty
 }

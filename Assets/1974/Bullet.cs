@@ -32,31 +32,45 @@ public class Bullet : MonoBehaviour
             ownerAgent.OnMissedShot();
         }
     }
+    // In Bullet.cs
 
     void OnTriggerEnter2D(UnityEngine.Collider2D col)
     {
-        hasHitTarget = true; // Mark that we hit something
+        hasHitTarget = true;
 
-        // Check if we hit a tank
-        TankHealth tank = col.gameObject.GetComponent<TankHealth>();
-
-        if (tank != null && tank.gameObject != owner.gameObject)
-        {
-            tank.TakeHit();
-        }
-
+        TankHealth tankHealth = col.gameObject.GetComponent<TankHealth>();
         TankAgent tankAgent = col.gameObject.GetComponent<TankAgent>();
-        if (ownerAgent != null && tankAgent != null && tankAgent != ownerAgent)
+
+        // Check if we hit an enemy tank
+        if (tankHealth != null && tankHealth.gameObject != owner.gameObject)
         {
-            // This shell hit the other AI (good hit!)
-            ownerAgent.RewardForHit();
-            tankAgent.PenalizeForGettingHit();
+            // Check the tank's state BEFORE applying the hit
+            bool wasAlreadyDisabled = tankHealth.IsDisabled();
+
+            // Apply the hit and make the tank disabled regardless
+            tankHealth.TakeHit();
+
+            // --- REVISED REWARD LOGIC ---
+            // Only give the owner agent a reward if the tank was NOT already disabled
+            if (ownerAgent != null && !wasAlreadyDisabled)
+            {
+                ownerAgent.RewardForHit();
+            }
+
+            // The agent that got hit should always be penalized
+            if (tankAgent != null && tankAgent != ownerAgent)
+            {
+                tankAgent.PenalizeForGettingHit();
+            }
         }
         else if (col.CompareTag("Wall") && ownerAgent != null)
         {
-            ownerAgent.AddReward(-0.05f); // Increased penalty for hitting walls
+            // This penalty is for bullets hitting walls, not the tank itself.
+            // It's a different kind of "miss". It's fine to keep it.
+            ownerAgent.AddReward(-0.2f);
         }
 
         Destroy(gameObject);
     }
+
 }
