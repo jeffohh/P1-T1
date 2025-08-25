@@ -1025,6 +1025,70 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1877057247287091024, guid: ff356f68bfb1efb41a342ed009a42c3b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877057247287091024, guid: ff356f68bfb1efb41a342ed009a42c3b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -17.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 2674334581761650336, guid: ff356f68bfb1efb41a342ed009a42c3b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 25.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 2674334581761650336, guid: ff356f68bfb1efb41a342ed009a42c3b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748821513318572358, guid: ff356f68bfb1efb41a342ed009a42c3b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748821513318572358, guid: ff356f68bfb1efb41a342ed009a42c3b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 4101835740313408026, guid: ff356f68bfb1efb41a342ed009a42c3b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -15.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 4101835740313408026, guid: ff356f68bfb1efb41a342ed009a42c3b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443184521586762053, guid: ff356f68bfb1efb41a342ed009a42c3b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443184521586762053, guid: ff356f68bfb1efb41a342ed009a42c3b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 7370167653790470640, guid: ff356f68bfb1efb41a342ed009a42c3b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 24.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7370167653790470640, guid: ff356f68bfb1efb41a342ed009a42c3b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 8015714341144299801, guid: ff356f68bfb1efb41a342ed009a42c3b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 25.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8015714341144299801, guid: ff356f68bfb1efb41a342ed009a42c3b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 8120037177027752656, guid: ff356f68bfb1efb41a342ed009a42c3b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8120037177027752656, guid: ff356f68bfb1efb41a342ed009a42c3b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -16.39
+      objectReference: {fileID: 0}
     - target: {fileID: 8869528142598173508, guid: ff356f68bfb1efb41a342ed009a42c3b, type: 3}
       propertyPath: m_Name
       value: Training Arena

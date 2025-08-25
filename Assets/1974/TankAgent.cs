@@ -113,6 +113,14 @@ public class TankAgent : Agent
         float turn = (turnAction == 0) ? -1f : (turnAction == 2) ? 1f : 0f;
         bool shoot = (shootAction == 1);
 
+        // --- NEW: PUNISH WASTED SHOT ATTEMPTS ---
+        if (shoot && !controller.CanShoot())
+        {
+            // The agent tried to shoot when it couldn't. This is button mashing.
+            AddReward(-0.05f);
+        }
+        // ----------------------------------------
+
         controller.Drive(move, turn, shoot);
 
         if (CheckLineOfSight())
@@ -135,38 +143,41 @@ public class TankAgent : Agent
 
     private void CalculateRewards(float move, float turn, bool shoot)
     {
-        // --- 1. Small Time Penalty (encourages efficiency) ---
+        // --- A. Small Time Penalty (encourages efficiency) ---
         AddReward(-0.001f);
 
-        // --- 2. Positioning and Aiming Analysis ---
+        // --- B. Positioning and Aiming Analysis ---
         bool hasLineOfSight = CheckLineOfSight();
         Vector3 toEnemy = enemyTank.position - transform.position;
         float distanceToEnemy = toEnemy.magnitude;
         float angleToEnemy = Vector2.Angle(transform.up, toEnemy);
 
-        // --- 3. THE "TACTICAL ADVANTAGE" REWARD (The Sledgehammer) ---
-        // This is the core of the new system. We reward the agent for getting all the conditions right.
-        if (hasLineOfSight)
+        // --- C. HEAVILY PUNISH HIDING (Increased "Frustration") ---
+        if (timeSinceLastLoS > 2.0f) // Shorten the grace period to 2 seconds
         {
-            // A. Start with a base reward just for seeing the enemy.
-            AddReward(0.01f);
-
-            // B. Reward for being at the optimal combat distance.
-            // We use an animation curve shape: max reward at optimalDistance, falls off on either side.
-            float distanceScore = 1.0f - Mathf.Abs(distanceToEnemy - optimalDistance) / optimalDistance;
-            AddReward(Mathf.Max(0, distanceScore) * 0.02f); // Reward is between 0 and 0.02
-
-            // C. Reward for aiming. The closer to 0 degrees, the higher the reward.
-            float facingScore = 1.0f - (angleToEnemy / 90f); // Score from 1 (perfect aim) to 0 (90 degrees off)
-            AddReward(Mathf.Max(0, facingScore) * 0.03f); // Reward is between 0 and 0.03
+            // Drastically increase the penalty. Hiding is now very costly.
+            AddReward(-0.1f);
         }
 
-        // --- 4. PENALTY FOR AIMLESS SPINNING ---
-        // This directly punishes the "spin-to-win" strategy.
-        if (move == 0 && turn != 0 && !hasLineOfSight)
+        // --- D. EXPLICITLY REWARD EXPLORATION (The "Anti-Wall-Hugging" Reward) ---
+        // Check a small radius around the tank for walls.
+        if (Physics2D.OverlapCircle(transform.position, 3f, LayerMask.GetMask("Walls")) == null)
         {
-            // If I'm not moving, I am turning, and I can't see the enemy... I am aimlessly spinning.
-            AddReward(-0.05f);
+            // If there are no walls nearby, the tank is in an open area. Reward this bravery.
+            AddReward(0.05f);
+        }
+
+        // --- E. The "Tactical Advantage" Reward Stream (Still important) ---
+        if (hasLineOfSight)
+        {
+            // This logic remains a great way to reward good positioning when engaged.
+            AddReward(0.01f); // Base reward for LoS
+
+            float distanceScore = 1.0f - Mathf.Abs(distanceToEnemy - optimalDistance) / optimalDistance;
+            AddReward(Mathf.Max(0, distanceScore) * 0.02f);
+
+            float facingScore = 1.0f - (angleToEnemy / 90f);
+            AddReward(Mathf.Max(0, facingScore) * 0.03f);
         }
 
         // --- 5. SHOOTING LOGIC (Unchanged but now better supported) ---
