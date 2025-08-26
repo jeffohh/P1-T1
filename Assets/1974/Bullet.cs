@@ -75,6 +75,12 @@ public class Bullet : MonoBehaviour
             // Ignore landmines
             return;
         }
+
+        PivotWall pivotWall = col.gameObject.GetComponentInParent<PivotWall>();
+        if (pivotWall != null)
+        {
+            pivotWall.Hit(transform.position);
+        }
         Destroy(gameObject);
     }
 
