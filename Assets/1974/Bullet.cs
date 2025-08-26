@@ -70,6 +70,11 @@ public class Bullet : MonoBehaviour
             ownerAgent.AddReward(-0.2f);
         }
 
+        if (col.CompareTag("Landmine"))
+        {
+            // Ignore landmines
+            return;
+        }
         Destroy(gameObject);
     }
 
