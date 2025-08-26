@@ -18,13 +18,8 @@ public class TankAgent : Agent
     public float optimalDistance = 8f;
 
     // --- Action Smoothing ---
-    private int _lastMoveAction = 1; // 0=B, 1=N, 2=F
-    private int _lastTurnAction = 1; // 0=L, 1=N, 2=R
-    private int _consecutiveMoveSteps = 0;
-    private int _consecutiveTurnSteps = 0;
-
     private int stepsInEpisode = 0;
-    private int maxStepsPerEpisode = 5000; // ~50 seconds
+    private int maxStepsPerEpisode = 5000; // ~100 seconds
 
     private float timeSinceLastLoS = 0f;
 
@@ -42,11 +37,6 @@ public class TankAgent : Agent
 
         enemyTank.position = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
         enemyTank.rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
-
-        _lastMoveAction = 1;
-        _lastTurnAction = 1;
-        _consecutiveMoveSteps = 0;
-        _consecutiveTurnSteps = 0;
 
         stepsInEpisode = 0;
     }
@@ -84,29 +74,6 @@ public class TankAgent : Agent
         int moveAction = actions.DiscreteActions[0];   // 0=backward, 1=none, 2=forward
         int turnAction = actions.DiscreteActions[1];   // 0=left, 1=none, 2=right
         int shootAction = actions.DiscreteActions[2];  // 0=no, 1=yes
-
-        // --- Apply Action Smoothing Penalty ---
-        // --- NEW: Update Consecutive Action Counters ---
-        if (moveAction == _lastMoveAction && moveAction != 1) // If same move action and not idle
-        {
-            _consecutiveMoveSteps++;
-        }
-        else
-        {
-            _consecutiveMoveSteps = 0; // Reset if action changes or stops
-        }
-
-        if (turnAction == _lastTurnAction && turnAction != 1) // If same turn action and not idle
-        {
-            _consecutiveTurnSteps++;
-        }
-        else
-        {
-            _consecutiveTurnSteps = 0; // Reset if action changes or stops
-        }
-
-        _lastMoveAction = moveAction;
-        _lastTurnAction = turnAction;
 
         // --- Control the tank ---
         float move = (moveAction == 0) ? -1f : (moveAction == 2) ? 1f : 0f;

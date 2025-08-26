@@ -26,13 +26,11 @@ public class Bullet : MonoBehaviour
             owner.OnShellDestroyed();
         }
 
-        // If bullet expired without hitting anything, penalize slightly
         if (!hasHitTarget && ownerAgent != null)
         {
             ownerAgent.OnMissedShot();
         }
     }
-    // In Bullet.cs
 
     void OnTriggerEnter2D(UnityEngine.Collider2D col)
     {

@@ -28,8 +28,7 @@ public class TankHealth : MonoBehaviour
         isDisabled = true;
         disableTimer = disableTime;
 
-        rb.velocity = Vector2.zero;
-        rb.angularVelocity = 0f;
+        rb.bodyType = RigidbodyType2D.Static;
 
         controller.enabled = false; // stop movement + shooting
         StartCoroutine(FlashRoutine());
@@ -45,6 +44,7 @@ public class TankHealth : MonoBehaviour
                 isDisabled = false;
                 controller.enabled = true; // restore control
                 spriteRenderer.enabled = true; // ensure visible
+                rb.bodyType = RigidbodyType2D.Dynamic;
             }
         }
     }
