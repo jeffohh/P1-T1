@@ -248,7 +248,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'P1:'
+  m_text: 'AI:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4568,11 +4568,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8790188898813868699, guid: af03de0881a99c84ca49101b5e7d13fe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.284136
+      value: -3.87
       objectReference: {fileID: 0}
     - target: {fileID: 8790188898813868699, guid: af03de0881a99c84ca49101b5e7d13fe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.7741585
+      value: -8.12
       objectReference: {fileID: 0}
     - target: {fileID: 8790188898813868699, guid: af03de0881a99c84ca49101b5e7d13fe, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4756,7 +4756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team1Score: {fileID: 510809985}
-  team2Score: {fileID: 0}
+  team2Score: {fileID: 1887482922}
 --- !u!1001 &966125360
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -28,11 +28,8 @@ public class TankHealth : MonoBehaviour
         if (isDisabled) return; // already disabled
 
         bool isAgent = GetComponent<TankAgent>() != null;
-        if (isAgent)
-        {
-            GameManager gameManager = this.gameManager.GetComponent<GameManager>();
-            gameManager.IncrementScore(1);
-        }
+        GameManager gameManager = this.gameManager.GetComponent<GameManager>();
+        gameManager.IncrementScore(isAgent ? 1 : 2);
 
         isDisabled = true;
         disableTimer = disableTime;
