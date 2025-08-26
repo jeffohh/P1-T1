@@ -8,6 +8,8 @@ public class TankHealth : MonoBehaviour
     public float disableTime = 1.5f;   // seconds tank is disabled
     private bool isDisabled = false;
 
+    public GameObject gameManager;
+
     private TankController controller;
     private SpriteRenderer spriteRenderer;
     private float disableTimer;
@@ -25,11 +27,17 @@ public class TankHealth : MonoBehaviour
     {
         if (isDisabled) return; // already disabled
 
+        bool isAgent = GetComponent<TankAgent>() != null;
+        if (isAgent)
+        {
+            GameManager gameManager = this.gameManager.GetComponent<GameManager>();
+            gameManager.IncrementScore(1);
+        }
+
         isDisabled = true;
         disableTimer = disableTime;
 
-        rb.velocity = Vector2.zero;
-        rb.angularVelocity = 0f;
+        rb.bodyType = RigidbodyType2D.Static;
 
         controller.enabled = false; // stop movement + shooting
         StartCoroutine(FlashRoutine());
@@ -45,6 +53,7 @@ public class TankHealth : MonoBehaviour
                 isDisabled = false;
                 controller.enabled = true; // restore control
                 spriteRenderer.enabled = true; // ensure visible
+                rb.bodyType = RigidbodyType2D.Dynamic;
             }
         }
     }

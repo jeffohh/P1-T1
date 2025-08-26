@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 219277609}
   - component: {fileID: 219277608}
   - component: {fileID: 219277607}
+  - component: {fileID: 219277611}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -405,6 +406,19 @@ MonoBehaviour:
   rotationSpeed: 180
   firePoint: {fileID: 34425760}
   bulletPrefab: {fileID: 5913155603630580248, guid: ce54018aa7eb76a4f8af3dac1e63bc09, type: 3}
+--- !u!114 &219277611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219277601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b20d554d6b10941b27170bf765e029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableTime: 1.5
 --- !u!1 &220100594
 GameObject:
   m_ObjectHideFlags: 0
@@ -22000,6 +22014,7 @@ GameObject:
   - component: {fileID: 818736098}
   - component: {fileID: 818736095}
   - component: {fileID: 818736099}
+  - component: {fileID: 818736100}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -22132,6 +22147,19 @@ MonoBehaviour:
   rotationSpeed: 180
   firePoint: {fileID: 0}
   bulletPrefab: {fileID: 0}
+--- !u!114 &818736100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818736094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b20d554d6b10941b27170bf765e029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableTime: 1.5
 --- !u!1 &895526806
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public TankController owner;
     private TankAgent ownerAgent;
-    public float lifeTime = 3f;
+    public float lifeTime = 5f;
     private bool hasHitTarget = false;
 
     public void Init(TankAgent tankOwner)
