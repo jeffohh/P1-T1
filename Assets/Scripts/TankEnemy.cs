@@ -21,7 +21,9 @@ public class TankEnemy: MonoBehaviour
     [Header("Perception & Combat")]
     public float detectionRadius = 8f;        
     public float attackRange = 6f;           
-    public float fireRate = 0.5f;         
+    public float fireRate = 0.5f;
+    [Range(0f, 30f)]
+    public float fireAimTolerance = 6f;
     public float searchDuration = 2.5f;    
     public float lostSightCooldown = 1.0f;     
 
@@ -151,30 +153,32 @@ public class TankEnemy: MonoBehaviour
     {
         if (player == null) return;
 
-        Vector2 dir = (player.position - transform.position).normalized;
+
+        Vector2 dir = (player.position - firePoint.position).normalized;
+
         RotateTowards(dir);
 
-        // Attack determination
-        bool hasLOS = !Physics2D.Linecast(transform.position, player.position, obstacleMask);
-        if (hasLOS && Time.time >= nextFireTime)
+        bool hasLOS = !Physics2D.Linecast(firePoint.position, player.position, obstacleMask);
+
+        float angleToTarget = Vector2.Angle(firePoint.up, dir);
+        bool aimed = angleToTarget <= fireAimTolerance;
+        bool inRange = Vector2.Distance(transform.position, player.position) <= attackRange;
+
+        if (inRange && hasLOS && aimed && Time.time >= nextFireTime)
         {
             if (firePoint != null && bulletPrefab != null)
             {
- 
-                firePoint.up = dir;
                 Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
                 nextFireTime = Time.time + fireRate;
             }
         }
 
-        // If the distance increases or enemy is blocked, return to chase
-        if (Vector2.Distance(transform.position, player.position) > attackRange || !hasLOS)
+        if (!inRange || !hasLOS)
         {
             searchTimer = Mathf.Max(searchTimer, lostSightCooldown);
             state = State.Chase;
         }
 
-        // Slow down or stay in place when attacking
         rb.velocity = Vector2.zero;
     }
 
