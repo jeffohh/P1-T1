@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Wall
   - Tank
+  - Obstacles
+  - Landmine
   layers:
   - Default
   - TransparentFX
