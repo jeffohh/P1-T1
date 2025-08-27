@@ -13,12 +13,17 @@ public class TankController : MonoBehaviour
     public GameObject bulletPrefab;
     private GameObject currentBullet;
 
+    [Header("Refs")]
+    public GameObject barrel;
+    private Animator barrelAnimator;
+
     Rigidbody2D rb;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
+        barrelAnimator = barrel.GetComponent<Animator>();
     }
 
     public void Drive(float moveInput, float turnInput, bool shoot)
@@ -48,6 +53,8 @@ public class TankController : MonoBehaviour
     void Fire()
     {
         if (!CanShoot()) return;
+
+        barrelAnimator.SetTrigger("isFire");
 
         currentBullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
