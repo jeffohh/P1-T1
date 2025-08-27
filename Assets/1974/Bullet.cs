@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public TankController owner;
     private TankAgent ownerAgent;
-    public float lifeTime = 5f;
+    public float lifeTime = 120f;
     private bool hasHitTarget = false;
 
     public void Init(TankAgent tankOwner)
@@ -26,13 +26,11 @@ public class Bullet : MonoBehaviour
             owner.OnShellDestroyed();
         }
 
-        // If bullet expired without hitting anything, penalize slightly
         if (!hasHitTarget && ownerAgent != null)
         {
             ownerAgent.OnMissedShot();
         }
     }
-    // In Bullet.cs
 
     void OnTriggerEnter2D(UnityEngine.Collider2D col)
     {
@@ -63,24 +61,26 @@ public class Bullet : MonoBehaviour
                 tankAgent.PenalizeForGettingHit();
             }
         }
-        else if (col.CompareTag("Wall") && ownerAgent != null)
-        {
-            // This penalty is for bullets hitting walls, not the tank itself.
-            // It's a different kind of "miss". It's fine to keep it.
-            ownerAgent.AddReward(-0.2f);
-        }
 
+        // --- Ignore Collisions ---
         if (col.CompareTag("Landmine"))
         {
-            // Ignore landmines
+            return;
+        }
+        else if (col.CompareTag("Portal"))
+        {
             return;
         }
 
+        // --- World Interactions ---
         PivotWall pivotWall = col.gameObject.GetComponentInParent<PivotWall>();
         if (pivotWall != null)
         {
             pivotWall.Hit(transform.position);
         }
+
+
+
         Destroy(gameObject);
     }
 

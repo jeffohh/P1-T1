@@ -26,11 +26,6 @@ public class TankHealth : MonoBehaviour
     public void TakeHit()
     {
         if (isDisabled) return; // already disabled
-
-        bool isAgent = GetComponent<TankAgent>() != null;
-        GameManager gameManager = this.gameManager.GetComponent<GameManager>();
-        gameManager.IncrementScore(isAgent ? 1 : 2);
-
         isDisabled = true;
         disableTimer = disableTime;
 
@@ -38,6 +33,11 @@ public class TankHealth : MonoBehaviour
 
         controller.enabled = false; // stop movement + shooting
         StartCoroutine(FlashRoutine());
+
+        // Update Score
+        bool isAgent = GetComponent<TankAgent>() != null;
+        GameManager gameManager = this.gameManager.GetComponent<GameManager>();
+        gameManager.IncrementScore(isAgent ? 1 : 2);
     }
 
     void Update()

@@ -8,6 +8,8 @@ TagManager:
   - Tank
   - Obstacles
   - Landmine
+  - Portal
+  - Bullet
   layers:
   - Default
   - TransparentFX

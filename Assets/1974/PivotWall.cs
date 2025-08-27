@@ -15,9 +15,9 @@ public class PivotWall : MonoBehaviour
             Vector2 localHit = transform.InverseTransformPoint(hitPoint);
             float direction = 0f;
             
-            if (Mathf.Abs(localHit.x) > Mathf.Abs(localHit.y))
+            if (localHit.x > 0)
             {
-                direction = localHit.x > 0 ? -rotationStep : rotationStep;
+                direction = localHit.y > 0 ? -rotationStep : rotationStep;
             }
             else
             {
