@@ -72,6 +72,23 @@ public class TankController : MonoBehaviour
         }
     }
 
+    public void SetVelocity(Vector2 dir)
+    {
+        rb.velocity = dir * moveSpeed;
+    }
+
+    public void SetRotation(float angle)
+    {
+        rb.rotation = angle;
+    }
+    public void HandleFire(bool shoot)
+    {
+        if (shoot && CanShoot())
+        {
+            Fire();
+        }
+    }
+
     public void OnShellDestroyed()
     {
         currentBullet = null;

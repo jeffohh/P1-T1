@@ -8,12 +8,13 @@ public class PlayerInput : MonoBehaviour
     private TankController controller;
 
     [Header("Controller")]
-    public Joystick joystick;       
+    public Joystick joystick;
     [Range(0f, 1f)] public float deadZone = 0.1f;
 
     private float cachedMove;
     private float cachedTurn;
     private bool cachedShoot;
+    private bool useJoystick;
 
     void Awake()
     {
@@ -22,36 +23,49 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        // joystick(move)
+        useJoystick = false; 
+
+        // ---- Joystick input ----
         float jx = 0f, jy = 0f;
         if (joystick != null)
         {
             jx = joystick.Horizontal;
             jy = joystick.Vertical;
         }
+        Vector2 inputDir = new Vector2(jx, jy);
 
-        bool useJoystick = new Vector2(jx, jy).sqrMagnitude > deadZone * deadZone;
-
-        if (useJoystick)
+        if (inputDir.sqrMagnitude > deadZone * deadZone)
         {
-            
-            cachedMove = jy;
-            cachedTurn = jx;
+            inputDir.Normalize();
+
+      
+            controller.SetVelocity(inputDir);
+
+            float angle = Mathf.Atan2(inputDir.y, inputDir.x) * Mathf.Rad2Deg - 90f;
+            controller.SetRotation(angle);
+
+            useJoystick = true;
         }
         else
         {
-            // keyboard(move)
+           
+            controller.SetVelocity(Vector2.zero);
+        }
+
+        // keyboard input
+        if (!useJoystick)
+        {
             float h = (Input.GetKey(KeyCode.D) ? 1f : 0f) + (Input.GetKey(KeyCode.A) ? -1f : 0f);
             float v = (Input.GetKey(KeyCode.W) ? 1f : 0f) + (Input.GetKey(KeyCode.S) ? -1f : 0f);
             cachedMove = v;
             cachedTurn = h;
         }
 
-        // keyboard(fire)
+        // keyboard fire
         if (Input.GetKeyDown(KeyCode.Space))
             cachedShoot = true;
 
-        // touch(fire)
+        // touch fire
         for (int i = 0; i < Input.touchCount; i++)
         {
             var t = Input.GetTouch(i);
@@ -74,7 +88,13 @@ public class PlayerInput : MonoBehaviour
 
     void FixedUpdate()
     {
-        controller.Drive(cachedMove, cachedTurn, cachedShoot);
+        controller.HandleFire(cachedShoot);
+
+        if (!useJoystick)
+        {
+            controller.Drive(cachedMove, cachedTurn, false);
+        }
+
         cachedShoot = false;
     }
 }
