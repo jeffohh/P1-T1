@@ -17,12 +17,6 @@ public class TankAgent : Agent
     [Header("AI Training Settings")]
     public float optimalDistance = 8f;
 
-    // --- Action Smoothing ---
-    private int _lastMoveAction = 1; // 0=B, 1=N, 2=F
-    private int _lastTurnAction = 1; // 0=L, 1=N, 2=R
-    private int _consecutiveMoveSteps = 0;
-    private int _consecutiveTurnSteps = 0;
-
     private int stepsInEpisode = 0;
     private int maxStepsPerEpisode = 5000; // ~50 seconds
 
@@ -42,11 +36,6 @@ public class TankAgent : Agent
 
         enemyTank.position = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
         enemyTank.rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
-
-        _lastMoveAction = 1;
-        _lastTurnAction = 1;
-        _consecutiveMoveSteps = 0;
-        _consecutiveTurnSteps = 0;
 
         stepsInEpisode = 0;
     }
@@ -81,36 +70,10 @@ public class TankAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        int moveAction = actions.DiscreteActions[0];   // 0=backward, 1=none, 2=forward
-        int turnAction = actions.DiscreteActions[1];   // 0=left, 1=none, 2=right
-        int shootAction = actions.DiscreteActions[2];  // 0=no, 1=yes
+        float moveAction = actions.ContinuousActions[0];   // 0=backward, 1=none, 2=forward
+        float turnAction = actions.ContinuousActions[1];   // 0=left, 1=none, 2=right
+        int shootAction = actions.DiscreteActions[0];  // 0=no, 1=yes
 
-        // --- Apply Action Smoothing Penalty ---
-        // --- NEW: Update Consecutive Action Counters ---
-        if (moveAction == _lastMoveAction && moveAction != 1) // If same move action and not idle
-        {
-            _consecutiveMoveSteps++;
-        }
-        else
-        {
-            _consecutiveMoveSteps = 0; // Reset if action changes or stops
-        }
-
-        if (turnAction == _lastTurnAction && turnAction != 1) // If same turn action and not idle
-        {
-            _consecutiveTurnSteps++;
-        }
-        else
-        {
-            _consecutiveTurnSteps = 0; // Reset if action changes or stops
-        }
-
-        _lastMoveAction = moveAction;
-        _lastTurnAction = turnAction;
-
-        // --- Control the tank ---
-        float move = (moveAction == 0) ? -1f : (moveAction == 2) ? 1f : 0f;
-        float turn = (turnAction == 0) ? -1f : (turnAction == 2) ? 1f : 0f;
         bool shoot = (shootAction == 1);
 
         // --- NEW: PUNISH WASTED SHOT ATTEMPTS ---
@@ -121,7 +84,7 @@ public class TankAgent : Agent
         }
         // ----------------------------------------
 
-        controller.Drive(move, turn, shoot);
+        controller.Drive(moveAction, turnAction, shoot);
 
         if (CheckLineOfSight())
         {
@@ -132,7 +95,7 @@ public class TankAgent : Agent
             timeSinceLastLoS += Time.fixedDeltaTime; // Increment timer if we can't
         }
 
-        CalculateRewards(move, turn, shoot);
+        CalculateRewards(moveAction, turnAction, shoot);
 
         stepsInEpisode++;
         if (stepsInEpisode >= maxStepsPerEpisode)
@@ -224,11 +187,13 @@ public class TankAgent : Agent
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        var actions = actionsOut.DiscreteActions;
-        actions[0] = 1; actions[1] = 1; actions[2] = 0;
-        if (Input.GetKey(KeyCode.W)) actions[0] = 2; else if (Input.GetKey(KeyCode.S)) actions[0] = 0;
-        if (Input.GetKey(KeyCode.A)) actions[1] = 0; else if (Input.GetKey(KeyCode.D)) actions[1] = 2;
-        if (Input.GetKey(KeyCode.Space)) actions[2] = 1;
+        var continuousActionsOut = actionsOut.ContinuousActions;
+        var discreteActionsOut = actionsOut.DiscreteActions;
+
+        continuousActionsOut[0] = Input.GetAxis("Vertical");   // Forward/back
+        continuousActionsOut[1] = Input.GetAxis("Horizontal"); // Turn
+
+        discreteActionsOut[0] = Input.GetKey(KeyCode.Space) ? 1 : 0; // Shoot
     }
 
     public void RewardForHit() { AddReward(1.0f); }

@@ -199,6 +199,7 @@ MonoBehaviour:
   rotationSpeed: 180
   firePoint: {fileID: 6160804361997016365}
   bulletPrefab: {fileID: 5913155603630580248, guid: ce54018aa7eb76a4f8af3dac1e63bc09, type: 3}
+  barrel: {fileID: 0}
 --- !u!114 &4262578604169974421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableTime: 1.5
+  gameManager: {fileID: 0}
 --- !u!114 &-7182181161546904937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,13 +230,17 @@ MonoBehaviour:
   m_DetectableTags:
   - Wall
   - Tank
-  m_RaysPerDirection: 3
-  m_MaxRayDegrees: 45
+  - Bullet
+  - Portal
+  - PivotWall
+  - Landmine
+  m_RaysPerDirection: 36
+  m_MaxRayDegrees: 180
   m_SphereCastRadius: 0.6
-  m_RayLength: 12
+  m_RayLength: 20
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1664
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 0.089157104, g: 0, b: 1, a: 1}

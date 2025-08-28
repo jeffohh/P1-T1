@@ -34,13 +34,19 @@ public class TankHealth : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Static;
 
         controller.enabled = false; // stop movement + shooting
-        animator.SetTrigger("isDead");
+
+        if (animator != null)
+            animator.SetTrigger("isDead");
+
         StartCoroutine(FlashRoutine());
 
         // Update Score
-        bool isAgent = GetComponent<TankAgent>() != null;
-        GameManager gameManager = this.gameManager.GetComponent<GameManager>();
-        gameManager.IncrementScore(isAgent ? 1 : 2);
+        if (gameManager != null)
+        {
+            bool isAgent = GetComponent<TankAgent>() != null;
+            GameManager gameManager = this.gameManager.GetComponent<GameManager>();
+            gameManager.IncrementScore(isAgent ? 1 : 2);
+        }
     }
 
     void Update()

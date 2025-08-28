@@ -15,7 +15,6 @@ public class TankController : MonoBehaviour
 
     [Header("Refs")]
     public GameObject barrel;
-    private Animator barrelAnimator;
 
     Rigidbody2D rb;
 
@@ -23,7 +22,6 @@ public class TankController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
-        barrelAnimator = barrel.GetComponent<Animator>();
     }
 
     public void Drive(float moveInput, float turnInput, bool shoot)
@@ -54,7 +52,11 @@ public class TankController : MonoBehaviour
     {
         if (!CanShoot()) return;
 
-        barrelAnimator.SetTrigger("isFire");
+        if (barrel != null)
+        {
+            Animator barrelAnimator = barrel.GetComponent<Animator>();
+            barrelAnimator.SetTrigger("isFire");
+        }
 
         currentBullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
