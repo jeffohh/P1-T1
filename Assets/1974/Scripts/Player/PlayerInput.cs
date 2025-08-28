@@ -1,44 +1,80 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(TankController))]
 public class PlayerInput : MonoBehaviour
 {
-    TankController controller;
+    private TankController controller;
 
     [Header("Controller")]
-    public Joystick joystick; 
+    public Joystick joystick;       
+    [Range(0f, 1f)] public float deadZone = 0.1f;
+
+    private float cachedMove;
+    private float cachedTurn;
+    private bool cachedShoot;
+
     void Awake()
     {
         controller = GetComponent<TankController>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        //float move = Input.GetKey(KeyCode.W) ? 1f : Input.GetKey(KeyCode.S) ? -1f : 0f;
-        //float turn = 0f;
-        //if (Input.GetKey(KeyCode.A)) turn = -1f;
-        //if (Input.GetKey(KeyCode.D)) turn = 1f;
-
-        //bool shoot = Input.GetKey(KeyCode.Space);
-
-        //controller.Drive(move, turn, shoot);
-
-
-        // joystick input
-        float h = joystick.Horizontal;
-        float v = joystick.Vertical;
-        float move = v;  
-        float turn = -h;  
-        bool shoot = false;
-        if (Input.GetMouseButtonDown(0))
+        // joystick(move)
+        float jx = 0f, jy = 0f;
+        if (joystick != null)
         {
-            Vector3 mousePos = Input.mousePosition;
-            if (mousePos.x < Screen.width / 2)
+            jx = joystick.Horizontal;
+            jy = joystick.Vertical;
+        }
+
+        bool useJoystick = new Vector2(jx, jy).sqrMagnitude > deadZone * deadZone;
+
+        if (useJoystick)
+        {
+            
+            cachedMove = jy;
+            cachedTurn = jx;
+        }
+        else
+        {
+            // keyboard(move)
+            float h = (Input.GetKey(KeyCode.D) ? 1f : 0f) + (Input.GetKey(KeyCode.A) ? -1f : 0f);
+            float v = (Input.GetKey(KeyCode.W) ? 1f : 0f) + (Input.GetKey(KeyCode.S) ? -1f : 0f);
+            cachedMove = v;
+            cachedTurn = h;
+        }
+
+        // keyboard(fire)
+        if (Input.GetKeyDown(KeyCode.Space))
+            cachedShoot = true;
+
+        // touch(fire)
+        for (int i = 0; i < Input.touchCount; i++)
+        {
+            var t = Input.GetTouch(i);
+            if (t.phase == TouchPhase.Began)
             {
-                shoot = true;
+                bool onRight = t.position.x >= Screen.width * 0.5f;
+                bool overUI = false;
+                if (EventSystem.current != null)
+                {
+                    var ped = new PointerEventData(EventSystem.current) { position = t.position };
+                    var results = new List<RaycastResult>();
+                    EventSystem.current.RaycastAll(ped, results);
+                    overUI = results.Count > 0;
+                }
+                if (onRight && !overUI)
+                    cachedShoot = true;
             }
         }
+    }
+
+    void FixedUpdate()
+    {
+        controller.Drive(cachedMove, cachedTurn, cachedShoot);
+        cachedShoot = false;
     }
 }
