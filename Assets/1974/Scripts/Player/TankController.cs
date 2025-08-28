@@ -16,6 +16,7 @@ public class TankController : MonoBehaviour
     [Header("Refs")]
     public GameObject barrel;
     private Animator barrelAnimator;
+    
 
     Rigidbody2D rb;
 
