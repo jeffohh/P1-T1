@@ -560,6 +560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41bad7b0d77deec4683934979a9d7da1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joystick: {fileID: 0}
+  deadZone: 0.1
 --- !u!95 &219277610
 Animator:
   serializedVersion: 5
@@ -22750,6 +22752,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96ecef34247e8641ae87fbb9654bf63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPage: {fileID: 0}
+  ingameUI: {fileID: 0}
+  stopPage: {fileID: 0}
+  startButton: {fileID: 0}
+  pauseImageButton: {fileID: 0}
+  continueButton: {fileID: 0}
+  playImageButton: {fileID: 0}
+  homeButton: {fileID: 0}
+  mainMenuSceneName: 
   team1Score: {fileID: 510809985}
   team2Score: {fileID: 1887482922}
 --- !u!1001 &966125360
@@ -23322,27 +23333,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1525096290 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8655803908928187073, guid: f6a70b075a0fb1345a5274cccb35f2fe, type: 3}
-  m_PrefabInstance: {fileID: 2111387644}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1525096292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525096290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2da9b772b397cf4ba77d782e529ea26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forceMultiplier: 20
-  hitLayers:
-    serializedVersion: 2
-    m_Bits: 2432
 --- !u!1 &1533468150
 GameObject:
   m_ObjectHideFlags: 0
@@ -24009,6 +23999,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 4866482487129384139, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6160804361997016365, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.55
@@ -24330,10 +24324,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8655803908928187073, guid: f6a70b075a0fb1345a5274cccb35f2fe, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1525096292}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6a70b075a0fb1345a5274cccb35f2fe, type: 3}
 --- !u!1001 &2472756477095031676
 PrefabInstance:
