@@ -350,6 +350,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41bad7b0d77deec4683934979a9d7da1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joystick: {fileID: 0}
+  deadZone: 0.1
 --- !u!114 &219277608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,6 +408,7 @@ MonoBehaviour:
   rotationSpeed: 180
   firePoint: {fileID: 34425760}
   bulletPrefab: {fileID: 5913155603630580248, guid: ce54018aa7eb76a4f8af3dac1e63bc09, type: 3}
+  barrel: {fileID: 0}
 --- !u!1 &220100594
 GameObject:
   m_ObjectHideFlags: 0
@@ -22133,6 +22136,7 @@ MonoBehaviour:
   rotationSpeed: 180
   firePoint: {fileID: 0}
   bulletPrefab: {fileID: 0}
+  barrel: {fileID: 0}
 --- !u!1 &895526806
 GameObject:
   m_ObjectHideFlags: 0

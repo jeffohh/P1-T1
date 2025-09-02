@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 442456942281936064}
   - component: {fileID: -3965890409788958534}
   - component: {fileID: 5043136593525436080}
-  - component: {fileID: 3664536501437415369}
   - component: {fileID: 696206669960983853}
   m_Layer: 10
   m_Name: BulletEnemy
@@ -151,20 +150,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.07}
   serializedVersion: 2
   m_Radius: 0.07
---- !u!114 &3664536501437415369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5913155603630580248}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb43fdb180563be44aa661f16086dde7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 0}
-  lifeTime: 3
 --- !u!114 &696206669960983853
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,34 +3,34 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class TankEnemy: MonoBehaviour
+public class TankEnemy : MonoBehaviour
 {
     public enum State { Patrol, Search, Chase, Attack }
 
     [Header("Refs")]
     public Transform player;
     public GameObject bulletPrefab;
-    public Transform firePoint;       
-    public Tilemap obstacleTilemap;         
-    public LayerMask obstacleMask;           
+    public Transform firePoint;
+    public Tilemap obstacleTilemap;
+    public LayerMask obstacleMask;
 
     [Header("Movement")]
     public float moveSpeed = 3f;
-    public float rotationSpeed = 720f;   
+    public float rotationSpeed = 720f;
 
     [Header("Perception & Combat")]
-    public float detectionRadius = 8f;        
-    public float attackRange = 6f;           
+    public float detectionRadius = 8f;
+    public float attackRange = 6f;
     public float fireRate = 0.5f;
     [Range(0f, 30f)]
     public float fireAimTolerance = 6f;
-    public float searchDuration = 2.5f;    
-    public float lostSightCooldown = 1.0f;     
+    public float searchDuration = 2.5f;
+    public float lostSightCooldown = 1.0f;
 
     [Header("Pathfinding")]
-    public float repathInterval = 0.25f;     
-    public List<Transform> patrolPoints;       
-    public float waypointReachDist = 0.1f;     
+    public float repathInterval = 0.25f;
+    public List<Transform> patrolPoints;
+    public float waypointReachDist = 0.1f;
 
     private Rigidbody2D rb;
     private State state = State.Patrol;
@@ -42,9 +42,12 @@ public class TankEnemy: MonoBehaviour
     private Vector3 lastSeenPlayerPos;
     private int patrolIndex = 0;
 
+    private Animator animator;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = rb.GetComponent<Animator>();
     }
 
     void Update()
@@ -104,11 +107,11 @@ public class TankEnemy: MonoBehaviour
 
     void FixedUpdate()
     {
-      
+
         FollowPath();
     }
 
-    
+
 
     void DoPatrol()
     {
@@ -148,18 +151,14 @@ public class TankEnemy: MonoBehaviour
         if (player == null) return;
         EnsurePathTo(player.position);
     }
-
     void DoAttack()
     {
         if (player == null) return;
 
-
         Vector2 dir = (player.position - firePoint.position).normalized;
-
         RotateTowards(dir);
 
         bool hasLOS = !Physics2D.Linecast(firePoint.position, player.position, obstacleMask);
-
         float angleToTarget = Vector2.Angle(firePoint.up, dir);
         bool aimed = angleToTarget <= fireAimTolerance;
         bool inRange = Vector2.Distance(transform.position, player.position) <= attackRange;
@@ -168,7 +167,24 @@ public class TankEnemy: MonoBehaviour
         {
             if (firePoint != null && bulletPrefab != null)
             {
-                Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+                // 播放动画
+                if (animator != null)
+                    animator.SetTrigger("isFire");
+
+         
+                GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+
+                // 绑定子弹的 owner
+                BulletNonML bullet = bulletGO.GetComponent<BulletNonML>();
+                if (bullet != null)
+                {
+                    TankController enemyController = GetComponent<TankController>();
+                    if (enemyController != null)
+                    {
+                        bullet.owner = enemyController;
+                    }
+                }
+
                 nextFireTime = Time.time + fireRate;
             }
         }
@@ -183,6 +199,7 @@ public class TankEnemy: MonoBehaviour
     }
 
 
+
     void EnsurePathTo(Vector3 target)
     {
         if (Time.time < nextRepathTime) return;
@@ -190,7 +207,6 @@ public class TankEnemy: MonoBehaviour
 
         if (obstacleTilemap == null)
         {
-            // 没有 Tilemap 时，直接朝向目标做简单 steering
             currentPath = new List<Vector3>() { target };
             pathIndex = 0;
             return;
