@@ -167,14 +167,12 @@ public class TankEnemy : MonoBehaviour
         {
             if (firePoint != null && bulletPrefab != null)
             {
-                // 播放动画
                 if (animator != null)
                     animator.SetTrigger("isFire");
-
          
                 GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
-                // 绑定子弹的 owner
+
                 BulletNonML bullet = bulletGO.GetComponent<BulletNonML>();
                 if (bullet != null)
                 {

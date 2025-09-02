@@ -5,7 +5,7 @@ using UnityEngine;
 public class TankHealth : MonoBehaviour
 {
     [Header("Hit Settings")]
-    public float disableTime = 1.5f;   // seconds tank is disabled
+    public float disableTime = 1.5f;  
     private bool isDisabled = false;
 
     public GameObject gameManager;
