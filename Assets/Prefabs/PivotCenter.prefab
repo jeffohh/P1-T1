@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5535071912614523832}
   - component: {fileID: 2904611103199705141}
   - component: {fileID: 8138969470230195337}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pivot-wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,9 +154,9 @@ GameObject:
   - component: {fileID: 5027062986560452760}
   - component: {fileID: 7162956730531871457}
   - component: {fileID: 5799095198018294580}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PivotCenter
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

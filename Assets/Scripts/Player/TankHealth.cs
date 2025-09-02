@@ -11,6 +11,7 @@ public class TankHealth : MonoBehaviour
     public GameObject gameManager;
 
     private TankController controller;
+    private TankSpawner spawner;
     private SpriteRenderer spriteRenderer;
     private float disableTimer;
     private Animator animator;
@@ -23,6 +24,7 @@ public class TankHealth : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        spawner = GetComponent<TankSpawner>();
     }
 
     public void TakeHit()
@@ -50,6 +52,8 @@ public class TankHealth : MonoBehaviour
             disableTimer -= Time.deltaTime;
             if (disableTimer <= 0f)
             {
+                spawner.MoveTankToRandomSpawn(gameObject);
+
                 isDisabled = false;
                 controller.enabled = true; // restore control
                 spriteRenderer.enabled = true; // ensure visible

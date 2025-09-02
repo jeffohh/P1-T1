@@ -23434,13 +23434,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2904611103199705141, guid: f6a70b075a0fb1345a5274cccb35f2fe, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 5027062986560452760, guid: f6a70b075a0fb1345a5274cccb35f2fe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.85
+      value: -2.08
       objectReference: {fileID: 0}
     - target: {fileID: 5027062986560452760, guid: f6a70b075a0fb1345a5274cccb35f2fe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.6
+      value: -0.58
       objectReference: {fileID: 0}
     - target: {fileID: 5027062986560452760, guid: f6a70b075a0fb1345a5274cccb35f2fe, type: 3}
       propertyPath: m_LocalPosition.z
@@ -23474,6 +23478,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5535071912614523832, guid: f6a70b075a0fb1345a5274cccb35f2fe, type: 3}
+      propertyPath: m_Size.x
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8086585756756991474, guid: f6a70b075a0fb1345a5274cccb35f2fe, type: 3}
       propertyPath: m_Name
       value: PivotCenter
@@ -23481,8 +23489,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5534818835716883554, guid: f6a70b075a0fb1345a5274cccb35f2fe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 755977909}
   m_SourcePrefab: {fileID: 100100000, guid: f6a70b075a0fb1345a5274cccb35f2fe, type: 3}
+--- !u!1 &755977904 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5534818835716883554, guid: f6a70b075a0fb1345a5274cccb35f2fe, type: 3}
+  m_PrefabInstance: {fileID: 731700554}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &755977909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755977904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2da9b772b397cf4ba77d782e529ea26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceMultiplier: 10
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!4 &789802168 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3473250170544274121, guid: d9b708c2453466847adba45a8a2976b5, type: 3}
