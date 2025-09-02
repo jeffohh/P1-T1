@@ -52,7 +52,10 @@ public class TankHealth : MonoBehaviour
             disableTimer -= Time.deltaTime;
             if (disableTimer <= 0f)
             {
-                spawner.MoveTankToRandomSpawn(gameObject);
+                if (spawner != null)
+                {
+                    spawner.MoveTankToRandomSpawn(gameObject);
+                }
 
                 isDisabled = false;
                 controller.enabled = true; // restore control

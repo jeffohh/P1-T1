@@ -7,15 +7,11 @@ public class WallAutoCollider : MonoBehaviour
     private SpriteRenderer sr;
     private BoxCollider2D bc2d;
 
-    // Start is called before the first frame update
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
-        bc2d = GetComponent<BoxCollider2D>();
-    }
 
-    void Start()
-    {
+        BoxCollider2D bc2d = gameObject.AddComponent<BoxCollider2D>();
         bc2d.size = sr.size;
     }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(WallAutoCollider))]
 public class KinematicForceEmitter2D : MonoBehaviour
 {
     public float forceMultiplier = 10f;
