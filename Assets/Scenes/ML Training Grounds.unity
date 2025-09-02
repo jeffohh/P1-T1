@@ -1256,24 +1256,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: Training Arena
       objectReference: {fileID: 0}
-    - target: {fileID: 6834743936912492159, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
-      propertyPath: spawnPointsParent
-      value: 
-      objectReference: {fileID: 7001285057523522523}
-    - target: {fileID: 8356462587388617154, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
-      propertyPath: spawnPointsParent
-      value: 
-      objectReference: {fileID: 7001285057523522523}
+    - target: {fileID: 5945944908870533798, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: DecisionPeriod
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7475302966959632581, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: DecisionPeriod
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
---- !u!1 &7001285057523522523 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6681675105968058797, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
-  m_PrefabInstance: {fileID: 7001285057523522522}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
