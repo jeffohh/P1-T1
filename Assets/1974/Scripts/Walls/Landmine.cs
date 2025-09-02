@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Landmine : MonoBehaviour
 {
-    void OnTriggerEnter2D(UnityEngine.Collider2D col)
+    void OnCollisionEnter2D(Collision2D col)
     {
        
         TankHealth tankHealth = col.gameObject.GetComponent<TankHealth>();
