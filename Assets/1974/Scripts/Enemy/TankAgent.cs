@@ -18,7 +18,7 @@ public class TankAgent : Agent
     public float optimalDistance = 8f;
 
     private int stepsInEpisode = 0;
-    private int maxStepsPerEpisode = 5000; // ~50 seconds
+    private int maxStepsPerEpisode = 2000;
 
     private float timeSinceLastLoS = 0f;
 
@@ -150,7 +150,7 @@ public class TankAgent : Agent
             AddReward(-0.05f); // Unconditional cost to fire
             if (!hasLineOfSight)
             {
-                AddReward(-0.5f); // Punish blind shots
+                AddReward(-0.3f); // Punish blind shots
             }
             else if (angleToEnemy < 5f)
             {
