@@ -26902,6 +26902,10 @@ PrefabInstance:
       propertyPath: spawnPointsParent
       value: 
       objectReference: {fileID: 1799632186}
+    - target: {fileID: -4168823508604953568, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
+      propertyPath: m_RayLayerMask.m_Bits
+      value: 640
+      objectReference: {fileID: 0}
     - target: {fileID: 1505328922068375814, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_FlipY
       value: 0
@@ -26949,6 +26953,10 @@ PrefabInstance:
     - target: {fileID: 4866482487129384139, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_Name
       value: TankAI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866482487129384139, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6160804361997016365, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_LocalPosition.y
@@ -27257,6 +27265,10 @@ PrefabInstance:
       propertyPath: spawnPointsParent
       value: 
       objectReference: {fileID: 1799632186}
+    - target: {fileID: -4168823508604953568, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
+      propertyPath: m_RayLayerMask.m_Bits
+      value: 768
+      objectReference: {fileID: 0}
     - target: {fileID: 1505328922068375814, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_FlipY
       value: 0
@@ -27270,7 +27282,23 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2438329098851251813, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
+      propertyPath: m_Mass
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2438329098851251813, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2438329098851251813, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
+      propertyPath: m_LinearDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2438329098851251813, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
+      propertyPath: m_AngularDrag
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2438329098851251813, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
+      propertyPath: m_UseAutoMass
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3626364653573134805, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
@@ -27296,6 +27324,10 @@ PrefabInstance:
     - target: {fileID: 4866482487129384139, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_Name
       value: TankPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866482487129384139, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7639147782299138560, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_LocalScale.x
