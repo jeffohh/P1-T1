@@ -196,7 +196,7 @@ public class TankAgent : Agent
         discreteActionsOut[0] = Input.GetKey(KeyCode.Space) ? 1 : 0; // Shoot
     }
 
-    public void RewardForHit() { AddReward(5.0f); }
+    public void RewardForHit() { AddReward(20.0f); }
     public void PenalizeForGettingHit() { AddReward(-1.0f); }
-    public void OnMissedShot() { AddReward(-0.4f); } // Increased penalty
+    public void OnMissedShot() { AddReward(-0.1f); } // Increased penalty
 }
