@@ -79,6 +79,12 @@ public class Bullet : MonoBehaviour
             pivotWall.Hit(transform.position);
         }
 
+        DestructWall destructWall = col.gameObject.GetComponent<DestructWall>();
+        if (destructWall != null)
+        {
+            destructWall.Destruct();
+        }
+
 
 
         Destroy(gameObject);

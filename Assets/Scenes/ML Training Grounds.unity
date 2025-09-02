@@ -122,6 +122,72 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &89231866
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 52.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 73.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.15192035
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022577529478181963, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_Name
+      value: Training Arena (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863078342890869833, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: enemyTank
+      value: 
+      objectReference: {fileID: 89231867}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+--- !u!4 &89231867 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5615802938646588005, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+  m_PrefabInstance: {fileID: 89231866}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &508510429
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -187,6 +253,72 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5615802938646588005, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
   m_PrefabInstance: {fileID: 508510429}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &778542749
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 106.06856
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 73.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.15192035
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022577529478181963, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_Name
+      value: Training Arena (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863078342890869833, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: enemyTank
+      value: 
+      objectReference: {fileID: 778542750}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+--- !u!4 &778542750 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5615802938646588005, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+  m_PrefabInstance: {fileID: 778542749}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &779783632
 PrefabInstance:
@@ -412,6 +544,72 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1344403731
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 160.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 110.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.15192035
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022577529478181963, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_Name
+      value: Training Arena (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863078342890869833, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: enemyTank
+      value: 
+      objectReference: {fileID: 1344403732}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+--- !u!4 &1344403732 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5615802938646588005, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+  m_PrefabInstance: {fileID: 1344403731}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1452415761
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -544,6 +742,72 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5615802938646588005, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
   m_PrefabInstance: {fileID: 1469974606}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1525090594
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 106.06856
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 110.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.15192035
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022577529478181963, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_Name
+      value: Training Arena (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863078342890869833, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: enemyTank
+      value: 
+      objectReference: {fileID: 1525090595}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+--- !u!4 &1525090595 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5615802938646588005, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+  m_PrefabInstance: {fileID: 1525090594}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1561891073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -609,6 +873,72 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5615802938646588005, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
   m_PrefabInstance: {fileID: 1561891073}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1663401776
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.6314418
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 110.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.15192035
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022577529478181963, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_Name
+      value: Training Arena (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863078342890869833, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: enemyTank
+      value: 
+      objectReference: {fileID: 1663401777}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+--- !u!4 &1663401777 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5615802938646588005, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+  m_PrefabInstance: {fileID: 1663401776}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1698637376
 PrefabInstance:
@@ -676,6 +1006,204 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5615802938646588005, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
   m_PrefabInstance: {fileID: 1698637376}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1794305263
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.6314418
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 73.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.15192035
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022577529478181963, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_Name
+      value: Training Arena (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863078342890869833, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: enemyTank
+      value: 
+      objectReference: {fileID: 1794305264}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+--- !u!4 &1794305264 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5615802938646588005, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+  m_PrefabInstance: {fileID: 1794305263}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1893182234
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 52.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 110.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.15192035
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022577529478181963, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_Name
+      value: Training Arena (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863078342890869833, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: enemyTank
+      value: 
+      objectReference: {fileID: 1893182235}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+--- !u!4 &1893182235 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5615802938646588005, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+  m_PrefabInstance: {fileID: 1893182234}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1911595163
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 160.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 73.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.15192035
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281029594492182272, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022577529478181963, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: m_Name
+      value: Training Arena (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863078342890869833, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: enemyTank
+      value: 
+      objectReference: {fileID: 1911595164}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+--- !u!4 &1911595164 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5615802938646588005, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+  m_PrefabInstance: {fileID: 1911595163}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7001285057523522522
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -728,29 +1256,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: Training Arena
       objectReference: {fileID: 0}
-    - target: {fileID: 5945944908870533798, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
-      propertyPath: DecisionPeriod
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7475302966959632581, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
-      propertyPath: DecisionPeriod
-      value: 2
-      objectReference: {fileID: 0}
+    - target: {fileID: 6834743936912492159, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: spawnPointsParent
+      value: 
+      objectReference: {fileID: 7001285057523522523}
+    - target: {fileID: 8356462587388617154, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+      propertyPath: spawnPointsParent
+      value: 
+      objectReference: {fileID: 7001285057523522523}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+--- !u!1 &7001285057523522523 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6681675105968058797, guid: bc0f11d91b6f5044a944fb8e0a7ae145, type: 3}
+  m_PrefabInstance: {fileID: 7001285057523522522}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 7001285057523522522}
   - {fileID: 1469974606}
+  - {fileID: 1794305263}
+  - {fileID: 1663401776}
   - {fileID: 1561891073}
   - {fileID: 1452415761}
+  - {fileID: 778542749}
+  - {fileID: 1525090594}
   - {fileID: 1132403631}
   - {fileID: 779783632}
+  - {fileID: 89231866}
+  - {fileID: 1893182234}
   - {fileID: 508510429}
   - {fileID: 1698637376}
+  - {fileID: 1911595163}
+  - {fileID: 1344403731}
   - {fileID: 1180147955}

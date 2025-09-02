@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 9150046155340487195}
   - component: {fileID: 4262578604169974421}
   - component: {fileID: -7182181161546904937}
+  - component: {fileID: -489484925404948966}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Tank
@@ -243,3 +244,16 @@ MonoBehaviour:
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 0.089157104, g: 0, b: 1, a: 1}
+--- !u!114 &-489484925404948966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4866482487129384139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 906d68f2e72fa7e439bca705929df67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPointsParent: {fileID: 0}
