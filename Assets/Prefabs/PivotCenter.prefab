@@ -214,7 +214,7 @@ MonoBehaviour:
   forceMultiplier: 10
   hitLayers:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 2432
 --- !u!50 &7678808443398439414
 Rigidbody2D:
   serializedVersion: 4

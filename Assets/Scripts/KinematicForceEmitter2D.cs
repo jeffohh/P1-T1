@@ -56,6 +56,13 @@ public class KinematicForceEmitter2D : MonoBehaviour
                 hit.rigidbody.WakeUp();
                 hit.rigidbody.AddForceAtPosition(totalVelocity.normalized * strength, hit.point, ForceMode2D.Impulse);
 
+                TankController tank = hit.rigidbody.GetComponent<TankController>();
+                if (tank != null)
+                {
+                    tank.AddExternalForce(totalVelocity.normalized * strength);
+                    Debug.Log($"Applied force {totalVelocity.normalized * strength} to tank {tank.name}");
+                }
+
                 Debug.DrawRay(hit.point, totalVelocity.normalized * 0.3f, Color.red, 0.2f);
             }
         }

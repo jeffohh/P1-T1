@@ -8,6 +8,7 @@ public class TankController : MonoBehaviour
     [Header("Settings")]
     public float moveSpeed = 3f;
     public float rotationSpeed = 180f;
+    public float damping = 0.99f;
 
     public Transform firePoint;
     public GameObject bulletPrefab;
@@ -16,7 +17,8 @@ public class TankController : MonoBehaviour
     [Header("Refs")]
     public GameObject barrel;
     private Animator barrelAnimator;
-    
+
+    private Vector2 externalForces;
 
     Rigidbody2D rb;
 
@@ -34,6 +36,7 @@ public class TankController : MonoBehaviour
         // Move
         Vector2 forward = moveInput * moveSpeed * transform.up;
         rb.velocity = forward;
+        rb.velocity += externalForces;
 
         // Rotate
         float newRot = rb.rotation - turnInput * rotationSpeed * Time.fixedDeltaTime;
@@ -44,6 +47,8 @@ public class TankController : MonoBehaviour
         {
             Fire();
         }
+
+        externalForces = Vector2.Lerp(externalForces, Vector2.zero, Time.fixedDeltaTime * damping);
     }
 
     public bool CanShoot()
@@ -75,6 +80,7 @@ public class TankController : MonoBehaviour
     public void SetVelocity(Vector2 dir)
     {
         rb.velocity = dir * moveSpeed;
+        rb.velocity += externalForces;
     }
 
     public void SetRotation(float angle)
@@ -92,5 +98,10 @@ public class TankController : MonoBehaviour
     public void OnShellDestroyed()
     {
         currentBullet = null;
+    }
+
+    public void AddExternalForce(Vector2 force)
+    {
+        externalForces += force;
     }
 }
