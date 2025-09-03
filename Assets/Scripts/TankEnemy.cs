@@ -32,6 +32,15 @@ public class TankEnemy : MonoBehaviour
     public List<Transform> patrolPoints;
     public float waypointReachDist = 0.1f;
 
+    // ★ 新增：基于 Tag 的动态避让配置
+    [Header("Dynamic Avoid (by Tag)")]
+    public List<string> avoidTags = new List<string>() { "Obstacle", "WallDynamic" };
+    public float avoidLookAhead = 1.5f;
+    public float avoidCheckRadius = 0.6f;
+    public float avoidStrength = 1.0f;
+    public int avoidMaxHits = 4;
+    public LayerMask avoidPhysicsMask = ~0;
+
     private Rigidbody2D rb;
     private State state = State.Patrol;
     private List<Vector3> currentPath = new List<Vector3>();
@@ -232,19 +241,21 @@ public class TankEnemy : MonoBehaviour
 
         Vector3 wp = currentPath[pathIndex];
         Vector2 to = (wp - transform.position);
-        Vector2 dir = to.normalized;
+        Vector2 desiredDir = to.sqrMagnitude > 0.0001f ? to.normalized : (Vector2)transform.up;
 
-        RotateTowards(dir);
+        Vector2 avoid = ComputeAvoidanceVector();
+        Vector2 finalDir = (desiredDir + avoid * avoidStrength);
+        if (finalDir.sqrMagnitude < 0.0001f) finalDir = desiredDir;
+        finalDir = finalDir.normalized;
 
-        rb.velocity = transform.up * moveSpeed;
+        RotateTowards(finalDir);
+        rb.velocity = (Vector2)transform.up * moveSpeed;
 
         if (to.magnitude <= waypointReachDist)
         {
             pathIndex++;
             if (pathIndex >= currentPath.Count)
-            {
                 rb.velocity = Vector2.zero;
-            }
         }
     }
 
@@ -255,9 +266,60 @@ public class TankEnemy : MonoBehaviour
         rb.MoveRotation(newAngle);
     }
 
+
+
+
     bool Reached(Vector3 pos)
     {
         return Vector2.Distance(transform.position, pos) <= waypointReachDist + 0.05f;
+    }
+
+
+    // 根据 Tag 计算避让向量
+    Vector2 ComputeAvoidanceVector()
+    {
+        if (avoidTags == null || avoidTags.Count == 0) return Vector2.zero;
+
+        Vector2 forward = (Vector2)transform.up;
+        Vector2 probeCenter = (Vector2)transform.position + forward * avoidLookAhead;
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(probeCenter, avoidCheckRadius, avoidPhysicsMask);
+
+        if (hits == null || hits.Length == 0) return Vector2.zero;
+
+        Vector2 steer = Vector2.zero;
+        int count = 0;
+
+        foreach (var h in hits)
+        {
+            if (h == null) continue;
+            if (h.attachedRigidbody != null && h.attachedRigidbody.gameObject == this.gameObject) continue;
+
+            if (!HasAvoidTag(h.gameObject)) continue;
+
+            Vector2 closest = h.ClosestPoint(transform.position);
+            Vector2 away = ((Vector2)transform.position - closest);
+
+            float dist = away.magnitude + 1e-4f;
+            steer += away / dist;
+
+            count++;
+            if (count >= avoidMaxHits) break;
+        }
+
+        if (count == 0) return Vector2.zero;
+        return steer.normalized;
+    }
+
+    // 判断物体是否属于“需要避让的 Tag”
+    bool HasAvoidTag(GameObject go)
+    {
+        foreach (var t in avoidTags)
+        {
+            if (!string.IsNullOrEmpty(t) && go.CompareTag(t))
+                return true;
+        }
+        return false;
     }
 
     //Visual debugging
@@ -274,5 +336,10 @@ public class TankEnemy : MonoBehaviour
             for (int i = 0; i < currentPath.Count - 1; i++)
                 Gizmos.DrawLine(currentPath[i], currentPath[i + 1]);
         }
+
+        // 显示前方避让探测区域
+        Gizmos.color = Color.magenta;
+        Vector3 probeCenter = transform.position + transform.up * avoidLookAhead;
+        Gizmos.DrawWireSphere(probeCenter, avoidCheckRadius);
     }
 }
