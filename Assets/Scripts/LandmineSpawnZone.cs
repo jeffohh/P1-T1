@@ -25,7 +25,6 @@ public class LandmineSpawnZone : MonoBehaviour
             float x = Random.Range(cachedBounds.min.x, cachedBounds.max.x);
             float y = Random.Range(cachedBounds.min.y, cachedBounds.max.y);
             Vector2 worldPos = new Vector2(x, y);
-            Debug.Log($"RandomX: {x}, RandomY: {y}");
 
             // Optional: Check for wall colliders
             if (Physics2D.OverlapPoint(worldPos, wallLayerMask) == null)

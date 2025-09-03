@@ -17,7 +17,6 @@ public class LandmineManager : MonoBehaviour
     {
         // Auto-find all child zones
         zones.AddRange(GetComponentsInChildren<LandmineSpawnZone>());
-        Debug.Log($"Found {zones.Count} landmine zones.");
     }
 
     void Start()
