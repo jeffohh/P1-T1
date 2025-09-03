@@ -81,10 +81,10 @@ public class IceBlock : MonoBehaviour
             // iOS/Android：Input.acceleration 是设备重力方向（-1~1）
             Vector3 acc = Input.acceleration; // x:左右, y:上下(竖屏), z:朝外
             // 这里假定竖屏：向右倾斜→acc.x>0；向上倾斜→acc.y>0
-            v = new Vector2(acc.x, acc.y) * tiltSensitivity;
+            //v = new Vector2(acc.x, acc.y) * tiltSensitivity;
 
             // 若需要横屏，把 y/x 互换或取反即可：
-            // v = new Vector2(acc.y, -acc.x) * tiltSensitivity; // 例如右手横屏
+             v = new Vector2(acc.x, acc.y) * tiltSensitivity; // 例如右手横屏
         }
 
         if (v.sqrMagnitude < 0.0001f && enableKeyboardFallback)
