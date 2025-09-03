@@ -104,4 +104,9 @@ public class TankController : MonoBehaviour
     {
         externalForces += force;
     }
+
+    public void ClearExternalForces()
+    {
+        externalForces = Vector2.zero;
+    }
 }

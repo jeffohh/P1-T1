@@ -79,8 +79,6 @@ public class Bullet : MonoBehaviour
             pivotWall.Hit(transform.position);
         }
 
-
-
         Destroy(gameObject);
     }
 

@@ -61,6 +61,8 @@ public class TankHealth : MonoBehaviour
                 controller.enabled = true; // restore control
                 spriteRenderer.enabled = true; // ensure visible
                 rb.bodyType = RigidbodyType2D.Dynamic;
+
+                controller.ClearExternalForces();
             }
         }
     }
