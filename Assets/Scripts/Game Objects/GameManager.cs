@@ -4,28 +4,30 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Pages / UI Roots")]
-    public GameObject startPage;  
+    [Header("Pages / UI Roots (per scene)")]
+    public GameObject startPage; 
     public GameObject ingameUI;    
-    public GameObject stopPage;  
+    public GameObject stopPage;   
 
-    [Header("Start Page")]
-    public Button startButton;   
+    [Header("Start Page (MainScene)")]
+    public Button startButton;
 
-    [Header("In-Game UI")]
-    public Button pauseImageButton; 
+    [Header("In-Game UI (GameScene)")]
+    public Button pauseImageButton;
 
-    [Header("Stop Page (Pause)")]
-    public Button continueButton;   
-    public Button playImageButton;   
-    public Button homeButton;        
+    [Header("Stop Page (GameScene)")]
+    public Button continueButton;
+    public Button playImageButton;
+    public Button homeButton;
 
-    [Header("Optional: Load Main Menu Scene")]
-    public string mainMenuSceneName = "";  
+    [Header("Scenes")]
+    [Tooltip("MainScene")]
+    public string mainMenuSceneName = "MainScene";
+    [Tooltip(" GameScene")]
+    public string gameplaySceneName = "GameScene";
 
     [Header("Score")]
     private int team1ScoreValue;
@@ -37,6 +39,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        // button
         if (startButton != null)
         {
             startButton.onClick.RemoveAllListeners();
@@ -63,25 +66,67 @@ public class GameManager : MonoBehaviour
             homeButton.onClick.AddListener(ReturnHome);
         }
 
-        ShowStartPage();
+        SetupForActiveScene();
+
         UpdateScoreUI();
     }
 
-    void Update()
+    void OnEnable()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    // Score
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SetupForActiveScene();
+        UpdateScoreUI();
+    }
+
+    private void SetupForActiveScene()
+    {
+        string active = SceneManager.GetActiveScene().name;
+
+        bool inMainMenu = !string.IsNullOrEmpty(mainMenuSceneName) && active == mainMenuSceneName;
+        bool inGameplay = !string.IsNullOrEmpty(gameplaySceneName) && active == gameplaySceneName;
+
+        if (inMainMenu)
+        {
+            SafeSetActive(startPage, true);
+            SafeSetActive(ingameUI, false);
+            SafeSetActive(stopPage, false);
+            SetPaused(true);
+        }
+        else if (inGameplay)
+        {
+            SafeSetActive(startPage, false);
+            SafeSetActive(ingameUI, true);
+            SafeSetActive(stopPage, false);
+            SetPaused(false);
+        }
+        else
+        {
+            SafeSetActive(startPage, false);
+            SafeSetActive(ingameUI, false);
+            SafeSetActive(stopPage, false);
+            SetPaused(false);
+        }
+    }
+
+    private void SafeSetActive(GameObject go, bool on)
+    {
+        if (go != null) go.SetActive(on);
+    }
+
+    // ===== Score =====
     public void IncrementScore(int teamNumber)
     {
-        if (teamNumber == 1)
-        {
-            team1ScoreValue++;
-        }
-        else if (teamNumber == 2)
-        {
-            team2ScoreValue++;
-        }
+        if (teamNumber == 1) team1ScoreValue++;
+        else if (teamNumber == 2) team2ScoreValue++;
         UpdateScoreUI();
     }
 
@@ -91,27 +136,35 @@ public class GameManager : MonoBehaviour
         if (team2Score != null) team2Score.text = team2ScoreValue.ToString();
     }
 
-    // Status Switch
+    // ===== State Switch =====
     public void StartGame()
     {
-        if (startPage) startPage.SetActive(false);
-        if (stopPage) stopPage.SetActive(false);
-        if (ingameUI) ingameUI.SetActive(true);
-
-        SetPaused(false);
+        if (!string.IsNullOrEmpty(gameplaySceneName))
+        {
+            Time.timeScale = 1f;
+            AudioListener.pause = false;
+            SceneManager.LoadScene(gameplaySceneName);
+        }
+        else
+        {
+            SafeSetActive(startPage, false);
+            SafeSetActive(stopPage, false);
+            SafeSetActive(ingameUI, true);
+            SetPaused(false);
+        }
     }
 
     public void PauseGame()
     {
-        if (stopPage) stopPage.SetActive(true);
-        if (ingameUI) ingameUI.SetActive(false);
+        SafeSetActive(stopPage, true);
+        SafeSetActive(ingameUI, false);
         SetPaused(true);
     }
 
     public void ResumeGame()
     {
-        if (stopPage) stopPage.SetActive(false);
-        if (ingameUI) ingameUI.SetActive(true);
+        SafeSetActive(stopPage, false);
+        SafeSetActive(ingameUI, true);
         SetPaused(false);
     }
 
@@ -119,30 +172,24 @@ public class GameManager : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(mainMenuSceneName))
         {
-            Time.timeScale = 1f;         
+            Time.timeScale = 1f;
             AudioListener.pause = false;
             SceneManager.LoadScene(mainMenuSceneName);
         }
         else
         {
-            ShowStartPage();
+            SafeSetActive(startPage, true);
+            SafeSetActive(ingameUI, false);
+            SafeSetActive(stopPage, false);
+            SetPaused(true);
         }
     }
 
-    // tools
-    private void ShowStartPage()
-    {
-        if (startPage) startPage.SetActive(true);
-        if (ingameUI) ingameUI.SetActive(false);
-        if (stopPage) stopPage.SetActive(false);
-        SetPaused(true); 
-    }
-
+    // ===== tools =====
     private void SetPaused(bool paused)
     {
         IsPaused = paused;
         Time.timeScale = paused ? 0f : 1f;
         AudioListener.pause = paused;
-
     }
 }
