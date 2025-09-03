@@ -58,48 +58,42 @@ public class IceBlock : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 tilt = ReadTiltVector(); // 读倾斜/后备输入
+        Vector2 tilt = ReadTiltVector(); 
 
-        // 施加推力（冰面感：即使不按也会有惯性，靠碰撞/摩擦慢慢停）
         rb.AddForce(tilt * acceleration, ForceMode2D.Force);
 
-        // 限速
         if (rb.velocity.sqrMagnitude > maxSpeed * maxSpeed)
         {
             rb.velocity = rb.velocity.normalized * maxSpeed;
         }
     }
 
-    // —— 读倾斜或键盘 —— //
     private Vector2 ReadTiltVector()
     {
         Vector2 v = Vector2.zero;
 
         if (gyroAvailable)
         {
-            // 优先用加速度计（横竖屏都适配更简单）
-            // iOS/Android：Input.acceleration 是设备重力方向（-1~1）
-            Vector3 acc = Input.acceleration; // x:左右, y:上下(竖屏), z:朝外
-            // 这里假定竖屏：向右倾斜→acc.x>0；向上倾斜→acc.y>0
+
+            Vector3 acc = Input.acceleration;
+            // 竖屏
             //v = new Vector2(acc.x, acc.y) * tiltSensitivity;
 
-            // 若需要横屏，把 y/x 互换或取反即可：
-             v = new Vector2(acc.x, acc.y) * tiltSensitivity; // 例如右手横屏
+            // 横屏
+             v = new Vector2(acc.x, acc.y) * tiltSensitivity;
         }
 
         if (v.sqrMagnitude < 0.0001f && enableKeyboardFallback)
         {
-            // 编辑器/PC 后备：WASD / 方向键
+            // WASD
             float h = Input.GetAxisRaw("Horizontal"); // A/D or ←/→
             float k = Input.GetAxisRaw("Vertical");   // W/S or ↑/↓
             v = new Vector2(h, k);
         }
 
-        // 死区与归一化放到力应用处处理（这里直接返回）
         return v;
     }
 
-    // —— 碰撞伤害 —— //
     void OnCollisionEnter2D(Collision2D col)
     {
         TryDamage(col.collider);
@@ -107,7 +101,6 @@ public class IceBlock : MonoBehaviour
 
     void OnCollisionStay2D(Collision2D col)
     {
-        // 连续接触时也可触发（受冷却限制）
         TryDamage(col.collider);
     }
 
@@ -115,7 +108,6 @@ public class IceBlock : MonoBehaviour
     {
         if (rb.velocity.magnitude < hitSpeedThreshold) return;
 
-        // 如果指定了 player/enemy，则只对这两个生效
         if (player != null || enemy != null)
         {
             TankHealth thTarget = other.GetComponent<TankHealth>();
@@ -129,7 +121,6 @@ public class IceBlock : MonoBehaviour
             return;
         }
 
-        // 未指定则对任何 TankHealth 生效
         var th = other.GetComponent<TankHealth>();
         if (th != null)
         {
@@ -146,8 +137,6 @@ public class IceBlock : MonoBehaviour
             return;
 
         lastHitTime[id] = now;
-
-        // 只有在目标未处于“禁用/死亡动画”时才打（可按需放开）
         if (!target.IsDisabled())
         {
             target.TakeHit();
