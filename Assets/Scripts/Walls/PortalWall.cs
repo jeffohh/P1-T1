@@ -22,20 +22,22 @@ public class PortalWall : MonoBehaviour
             // Teleport the object to the linked portal's position
             Vector3 localPos = transform.InverseTransformPoint(collision.transform.position);
             Vector3 newWorldPos = linkedPortal.transform.TransformPoint(localPos);
-            rb.position = newWorldPos;
 
-            // Adjust the object's velocity to match the linked portal's orientation, make it mirror the velocity relative to the portal's facing direction
-            Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
-            Vector2 reflectedLocalVelocity = Vector2.Reflect(localVelocity, Vector2.up);
-            Vector2 newWorldVelocity = linkedPortal.transform.TransformDirection(reflectedLocalVelocity);
-            rb.velocity = newWorldVelocity;
+            Vector3 portalCenter = linkedPortal.transform.position;
 
+            Vector3 inwardDir = (portalCenter - newWorldPos).normalized;
+            float offsetDistance = 0.5f; // tweak this value
+
+            rb.position = newWorldPos + inwardDir * offsetDistance;
 
             // Adjust object's rotation to match the linked portal's orientation based on the difference between the two portals
-            Vector2 facingDir = collision.transform.right; // tank's local right = "forward"
-            Vector2 reflectedFacingDir = Vector2.Reflect(facingDir, transform.up); // mirror over portal's surface
-            float newRotation = Mathf.Atan2(reflectedFacingDir.y, reflectedFacingDir.x) * Mathf.Rad2Deg - 90f;
+            Quaternion portalDeltaRotation = linkedPortal.transform.rotation * Quaternion.Inverse(transform.rotation);
+            Vector2 newFacingDir = portalDeltaRotation * collision.transform.right;
+            float newRotation = Mathf.Atan2(newFacingDir.y, newFacingDir.x) * Mathf.Rad2Deg;
             rb.rotation = newRotation;
+
+            Vector2 newVelocity = portalDeltaRotation * rb.velocity;
+            rb.velocity = newVelocity;
 
             // Add to the set to prevent immediate re-teleportation
             linkedPortal.objectsInPortal.Add(collision);
