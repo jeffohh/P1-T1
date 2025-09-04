@@ -43,6 +43,7 @@ public class TankHealth : MonoBehaviour
         bool isAgent = GetComponent<TankAgent>() != null;
         GameManager gameManager = this.gameManager.GetComponent<GameManager>();
         gameManager.IncrementScore(isAgent ? 1 : 2);
+        Debug.Log(isAgent);
     }
 
     void Update()

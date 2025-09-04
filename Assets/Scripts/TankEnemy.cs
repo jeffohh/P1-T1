@@ -32,7 +32,7 @@ public class TankEnemy : MonoBehaviour
     public List<Transform> patrolPoints;
     public float waypointReachDist = 0.1f;
 
-    // ★ 新增：基于 Tag 的动态避让配置
+    // 基于 Tag 的动态避让配置
     [Header("Dynamic Avoid (by Tag)")]
     public List<string> avoidTags = new List<string>() { "Obstacle", "WallDynamic" };
     public float avoidLookAhead = 1.5f;

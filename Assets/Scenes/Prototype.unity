@@ -783,6 +783,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b20d554d6b10941b27170bf765e029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &219277621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219277601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    VectorObservationSize: 1
+    NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 0
+      BranchSizes: 01000000
+    VectorActionSize: 01000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 0
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 0
+  m_BehaviorType: 0
+  m_BehaviorName: My Behavior
+  TeamId: 0
+  m_UseChildSensors: 1
+  m_UseChildActuators: 1
+  m_ObservableAttributeHandling: 0
 --- !u!1 &220100594
 GameObject:
   m_ObjectHideFlags: 0
@@ -45698,7 +45728,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3626364653573134805, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_Radius
-      value: 0.22
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3626364653573134805, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_Enabled
@@ -45730,7 +45760,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4866482487129384139, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6160804361997016365, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_LocalPosition.y
@@ -45750,11 +45780,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639147782299138560, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.99
+      value: -11.86
       objectReference: {fileID: 0}
     - target: {fileID: 7639147782299138560, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.3886
+      value: 7.3
       objectReference: {fileID: 0}
     - target: {fileID: 7639147782299138560, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_LocalPosition.z
@@ -45810,6 +45840,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4866482487129384139, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2107411562}
+    - targetCorrespondingSourceObject: {fileID: 4866482487129384139, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2107411567}
+    - targetCorrespondingSourceObject: {fileID: 4866482487129384139, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2107411575}
     - targetCorrespondingSourceObject: {fileID: 2085750424452436686, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1137023343}
@@ -46064,7 +46100,7 @@ MonoBehaviour:
   - Landmine
   - Wall
   avoidLookAhead: 0.09
-  avoidCheckRadius: 1.58
+  avoidCheckRadius: 2.5
   avoidStrength: 1
   avoidMaxHits: 3
   avoidPhysicsMask:
@@ -46081,6 +46117,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b20d554d6b10941b27170bf765e029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2107411567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107411543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    VectorObservationSize: 1
+    NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 0
+      BranchSizes: 01000000
+    VectorActionSize: 01000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 0
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 0
+  m_BehaviorType: 0
+  m_BehaviorName: My Behavior
+  TeamId: 0
+  m_UseChildSensors: 1
+  m_UseChildActuators: 1
+  m_ObservableAttributeHandling: 0
+--- !u!114 &2107411575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107411543}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b751791c18f628140ac4148905e764c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 0
+  enemyTank: {fileID: 0}
+  optimalDistance: 8
 --- !u!1001 &2110726952
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46289,11 +46373,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639147782299138560, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.18
+      value: -1.35
       objectReference: {fileID: 0}
     - target: {fileID: 7639147782299138560, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.71
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7639147782299138560, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_LocalPosition.z
@@ -46345,6 +46429,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4866482487129384139, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       insertIndex: -1
       addedObject: {fileID: 219277610}
+    - targetCorrespondingSourceObject: {fileID: 4866482487129384139, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 219277621}
     - targetCorrespondingSourceObject: {fileID: 2085750424452436686, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2472756477095031679}
