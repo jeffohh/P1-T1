@@ -4744,6 +4744,38 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -165
       objectReference: {fileID: 0}
+    - target: {fileID: 1646682028902643989, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1646682028902643989, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1646682028902643989, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1003747406}
+    - target: {fileID: 1646682028902643989, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1646682028902643989, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadSceneByName
+      objectReference: {fileID: 0}
+    - target: {fileID: 1646682028902643989, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SceneLoader, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1646682028902643989, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Prototype
+      objectReference: {fileID: 0}
+    - target: {fileID: 1646682028902643989, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1749677984719728008, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -4755,6 +4787,38 @@ PrefabInstance:
     - target: {fileID: 4783023113686606042, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 278
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002323493096084764, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002323493096084764, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002323493096084764, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1003747406}
+    - target: {fileID: 7002323493096084764, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002323493096084764, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadSceneByName
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002323493096084764, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SceneLoader, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002323493096084764, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002323493096084764, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7451485467815681584, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
       propertyPath: m_Pivot.x
@@ -24598,6 +24662,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8790188898813868699, guid: af03de0881a99c84ca49101b5e7d13fe, type: 3}
   m_PrefabInstance: {fileID: 1095716044}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1003747405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1003747407}
+  - component: {fileID: 1003747406}
+  m_Layer: 0
+  m_Name: Scene Loader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1003747406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003747405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e9e8e2808dfa214994150bd1b2a1194, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1003747407
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003747405}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.34000778, y: -0.14382839, z: 97.33893}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1019092332
 GameObject:
   m_ObjectHideFlags: 0
@@ -46260,6 +46368,7 @@ SceneRoots:
   - {fileID: 281233793}
   - {fileID: 1482859468}
   - {fileID: 936658243}
+  - {fileID: 1003747407}
   - {fileID: 1799632187}
   - {fileID: 845696310}
   - {fileID: 4967153011905796662}
