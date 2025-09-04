@@ -4477,8 +4477,6 @@ MonoBehaviour:
   timerText: {fileID: 55328611}
   resultScoreText: {fileID: 670617131}
   resultText: {fileID: 1893881388}
-  score1: 0
-  score2: 0
 --- !u!114 &232361817
 MonoBehaviour:
   m_ObjectHideFlags: 0

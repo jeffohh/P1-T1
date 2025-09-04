@@ -9,15 +9,11 @@ public class GameTimer : MonoBehaviour
 
     [Header("UI & Canvas")]
     public Canvas resultCanvas;
-    public TMP_Text score1Text; 
-    public TMP_Text score2Text;     
-    public TMP_Text timerText;       
-    public TMP_Text resultScoreText;
-    public TMP_Text resultText;     
-
-    [Header("Score")]
-    public int score1 = 0;
-    public int score2 = 0;
+    public TMP_Text score1Text;        // 场景中实时显示的 Team1 分数
+    public TMP_Text score2Text;        // 场景中实时显示的 Team2 分数
+    public TMP_Text timerText;         // 倒计时文本
+    public TMP_Text resultScoreText;   // 结果页：显示玩家分数
+    public TMP_Text resultText;        // 结果页：显示胜负
 
     private bool isEnded = false;
 
@@ -60,29 +56,27 @@ public class GameTimer : MonoBehaviour
         timer = 0;
 
         UpdateTimerUI();
-
         Time.timeScale = 0f;
 
         if (resultCanvas != null)
         {
             resultCanvas.gameObject.SetActive(true);
 
+            // ⚡ 从文本里读取分数（假设 score1Text / score2Text 的内容是数字字符串）
+            int s1 = 0;
+            int s2 = 0;
+            if (score1Text != null) int.TryParse(score1Text.text, out s1);
+            if (score2Text != null) int.TryParse(score2Text.text, out s2);
 
-            if (score1Text != null) score1Text.text = "" + score1;
-            if (score2Text != null) score2Text.text = "" + score2;
-
+            // 在结果界面显示分数
+            if (score1Text != null) score1Text.text = s1.ToString();
+            if (score2Text != null) score2Text.text = s2.ToString();
 
             if (resultScoreText != null)
-                resultScoreText.text = "Your Score: " + score1;
+                resultScoreText.text = "Your Score: " + s1;
 
             if (resultText != null)
-                resultText.text = (score1 > score2) ? "Victory" : "Lose";
+                resultText.text = (s1 > s2) ? "Victory" : "Lose";
         }
-    }
-
-    public void SetScores(int s1, int s2)
-    {
-        score1 = s1;
-        score2 = s2;
     }
 }
