@@ -9,9 +9,11 @@ public class GameTimer : MonoBehaviour
 
     [Header("UI & Canvas")]
     public Canvas resultCanvas;
-    public TMP_Text score1Text;
-    public TMP_Text score2Text;
-    public TMP_Text timerText;
+    public TMP_Text score1Text; 
+    public TMP_Text score2Text;     
+    public TMP_Text timerText;       
+    public TMP_Text resultScoreText;
+    public TMP_Text resultText;     
 
     [Header("Score")]
     public int score1 = 0;
@@ -65,8 +67,16 @@ public class GameTimer : MonoBehaviour
         {
             resultCanvas.gameObject.SetActive(true);
 
+
             if (score1Text != null) score1Text.text = "Team 1: " + score1;
             if (score2Text != null) score2Text.text = "Team 2: " + score2;
+
+
+            if (resultScoreText != null)
+                resultScoreText.text = "Your Score: " + score1;
+
+            if (resultText != null)
+                resultText.text = (score1 > score2) ? "Victory" : "Lose";
         }
     }
 
