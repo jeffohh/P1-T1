@@ -46100,7 +46100,7 @@ MonoBehaviour:
   - Landmine
   - Wall
   avoidLookAhead: 0.09
-  avoidCheckRadius: 2.5
+  avoidCheckRadius: 2
   avoidStrength: 1
   avoidMaxHits: 3
   avoidPhysicsMask:

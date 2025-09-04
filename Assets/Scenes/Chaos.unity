@@ -19770,7 +19770,7 @@ MonoBehaviour:
     m_Bits: 512
   moveSpeed: 2
   rotationSpeed: 500
-  detectionRadius: 20
+  detectionRadius: 50
   attackRange: 4
   fireRate: 0.5
   fireAimTolerance: 6
