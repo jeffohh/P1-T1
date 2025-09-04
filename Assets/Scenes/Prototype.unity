@@ -4784,6 +4784,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ConcludeScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 2679816967264725954, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4783023113686606042, guid: 5bf14b764d15a154fbd8bc159a2d8f97, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 278
