@@ -68,8 +68,8 @@ public class GameTimer : MonoBehaviour
             resultCanvas.gameObject.SetActive(true);
 
 
-            if (score1Text != null) score1Text.text = "Team 1: " + score1;
-            if (score2Text != null) score2Text.text = "Team 2: " + score2;
+            if (score1Text != null) score1Text.text = "" + score1;
+            if (score2Text != null) score2Text.text = "" + score2;
 
 
             if (resultScoreText != null)
