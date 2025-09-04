@@ -4440,7 +4440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4028c9f6df8629645821b1bef8079604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalTime: 2
+  totalTime: 120
   resultCanvas: {fileID: 375161254}
   score1Text: {fileID: 510809985}
   score2Text: {fileID: 1887482922}
@@ -45698,7 +45698,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3626364653573134805, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_Radius
-      value: 0.12863925
+      value: 0.19
       objectReference: {fileID: 0}
     - target: {fileID: 3626364653573134805, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_Enabled
@@ -45706,11 +45706,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3626364653573134805, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_Offset.x
-      value: -0.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3626364653573134805, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: m_Offset.y
-      value: -0.06999999
+      value: -0.08
       objectReference: {fileID: 0}
     - target: {fileID: 4262578604169974421, guid: 6726ea450ac5b3640a9a8a28fc30c645, type: 3}
       propertyPath: disableTime
@@ -46047,7 +46047,7 @@ MonoBehaviour:
     m_Bits: 512
   moveSpeed: 2
   rotationSpeed: 500
-  detectionRadius: 20
+  detectionRadius: 25
   attackRange: 4
   fireRate: 0.5
   fireAimTolerance: 6
