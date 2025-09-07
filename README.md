@@ -1,8 +1,8 @@
 # Tank – ReadMe
 #### Team Members
-Shuowei Wu – Producer – bzmlrwsw@gmail.com
-Jeffrey Le – Engineer – jeffreyle20@gmail.com
-Minghao Yang (Benjamin) – Engineer – jaminyang5@gmail.com
+- Shuowei Wu – Producer – bzmlrwsw@gmail.com
+- Jeffrey Le – Engineer – jeffreyle20@gmail.com
+- Minghao Yang (Benjamin) – Engineer – jaminyang5@gmail.com
 
 #### Installation Instructions
 
