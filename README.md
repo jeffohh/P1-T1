@@ -4,7 +4,7 @@
 - Jeffrey Le – Engineer – jeffreyle20@gmail.com
 - Minghao Yang (Benjamin) – Engineer – jaminyang5@gmail.com
 
-#### ▶️ Play Online
+#### Play Online
 Play the latest version here: [Tank: War of Walls](https://benjaminy.itch.io/tank)
 
 #### Installation Instructions
