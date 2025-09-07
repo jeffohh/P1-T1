@@ -1,13 +1,13 @@
 # Tank – ReadMe
 #### Team Members
 - Shuowei Wu – Producer – bzmlrwsw@gmail.com
-- Yunzheng Cai - Producer - ...
+- Yunzheng Cai - Producer - u1340403@utah.edu
 - Jeffrey Le – Engineer – jeffreyle20@gmail.com
 - Minghao Yang (Benjamin) – Engineer – jaminyang5@gmail.com
-- Karianne Hutchinson - Artist - ...
-- Jiawei Shao - Artist - ...
-- Warren Yan - Technical Artist - ...
-- Lin Lin - Designer - ...
+- Karianne Hutchinson - Artist - kariannehutchinson@gmail.com
+- Jiawei Shao - Artist - u1336780@utah.edu
+- Warren Yan - Technical Artist - warrenyan29@gmail.com
+- Lin Lin - Designer - u1592453@utah.edu
 
 #### Play Online
 Play the latest version here: [Tank: War of Walls](https://benjaminy.itch.io/tank)
